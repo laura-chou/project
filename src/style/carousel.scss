@@ -1,0 +1,37 @@
+// carousel
+#carousel {
+  height: 100vh;
+  .swiper-container{
+    height: 100%;
+  }
+  .swiper-button-prev,
+  .swiper-button-next{
+    transition: 0.5s;
+    background-size: 80%;
+  }
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover{
+    transform: scale(1.2);
+  }
+  .swiper-button-prev:focus,
+  .swiper-button-next:focus{
+    outline: none;
+  }
+  .swiper {
+    .swiper-slide{
+      height: 100% !important;
+      img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    }
+  }
+}
+/* 裝置斷點控制區 --------------------------*/
+/* 1461px 以下 */
+@media (max-width: 1606px) {
+  // #carousel { 
+  //     height: auto;
+  // }
+}

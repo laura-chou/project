@@ -1,0 +1,91 @@
+#btakeaway {
+  height: 100vh;
+  background: #F1F1E4;
+  .container {
+    height: 100%;
+  }
+  h1 {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .open {
+    height: 10%;
+    display: flex;
+    align-items: center;
+  }
+  .pagination {
+    width: 100%;
+  }
+  .page-item.active .page-link {
+    background-color: #CCCC41;
+    border-color: #C0C103;
+  }
+  .onoffswitch {
+    position: relative; 
+    width: 87px;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select: none;
+    .onoffswitch-checkbox {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .onoffswitch-label {
+      display: block; 
+      overflow: hidden; 
+      cursor: pointer;
+      border: 2px solid #999999; 
+      border-radius: 50px;
+    }
+    .onoffswitch-inner {
+      display: block; 
+      width: 200%; 
+      margin-left: -100%;
+      transition: margin 0.3s ease-in 0s;
+      &:after,
+      &:before{
+        display: block; 
+        float: left; 
+        width: 50%; 
+        height: 34px; 
+        padding: 0; 
+        line-height: 34px;
+        font-size: 14px; 
+        color: white; 
+        font-family: Trebuchet, Arial, sans-serif; 
+        font-weight: bold;
+        box-sizing: border-box;
+      }
+      &:after {
+        content: "OFF";
+        padding-right: 10px;
+        background-color: #000000; color: #FFFFFF;
+        text-align: right;
+      }
+      &:before {
+        content: "ON";
+        padding-left: 10px;
+        background-color: #C0C103; 
+        color: #FFFFFF;
+        text-align: left;
+      }
+    }
+    .onoffswitch-switch {
+      display: block; 
+      width: 37px;
+      height: 37px;
+      background: #FFFFFF;
+      position: absolute; 
+      top: 0; 
+      bottom: 0;
+      right: 49px;
+      border: 2px solid #999999; 
+      border-radius: 50px;
+      transition: all 0.3s ease-in 0s;
+    }
+  }
+}

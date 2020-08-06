@@ -1,0 +1,60 @@
+#takeaway {
+  height: 100vh;
+  background: #F1F1E4;
+  border-bottom: 1px solid gray;
+  .container {
+    height: 100%;
+    padding: 2% 10% 2% 10%;
+  }
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
+  }
+  .rule {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.9;
+    border-radius: 5%;
+    box-shadow: 1px 5px 10px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
+    text-align: left;
+    position: absolute;
+    h2 {
+      height: 10%;
+    }
+    img {
+      width: 10%;
+      margin: 1% 0 2% 0;
+    }
+    ol {
+      padding: 0;
+      margin: 10%;
+      li {
+        margin: 0 0 5% 0;
+      }
+    }
+    button {
+      font-weight: bold;
+    }
+  }
+}
+/* 裝置斷點控制區 --------------------------*/
+@media (min-width: 576px){
+  #takeaway {
+    .container {
+      padding: 10%;
+    }
+  }
+}

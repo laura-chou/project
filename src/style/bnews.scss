@@ -1,0 +1,33 @@
+#bnews {
+  height: 100vh;
+  background: #F1F1E4;
+  .container {
+    height: 100%;
+  }
+  h1 {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .new {
+    height: 90%;
+    font-size: 18px;
+    // flex-direction: column;
+  }
+  .pagination {
+    width: 100%;
+  }
+  .page-item.active .page-link {
+    background-color: #CCCC41;
+    border-color: #C0C103;
+  }
+}
+#menu-table{
+  height: 50%;
+  text-align:center;
+  td {
+    vertical-align:middle;
+  }
+}

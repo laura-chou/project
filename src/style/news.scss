@@ -1,0 +1,41 @@
+#news {
+  height: 100vh;
+  background: #F1F1E4;
+  border-bottom: 1px solid gray;
+  .container {
+    height: 100%;
+  }
+  h2,
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #my-table {
+    height: 500px;
+    margin-bottom: 0;
+    td {
+      vertical-align: middle;
+      width: 50%;
+    }
+  }
+  .pagination {
+    width: 100%;
+  }
+  .page-item.active .page-link {
+    background-color: #CCCC41;
+    border-color: #C0C103;
+  }
+}
+// sweetalert
+.sweetalert{
+  text-align: left;
+}
+/* 裝置斷點控制區 --------------------------*/
+/* lg 992px 以上 */
+@media (min-width: 992px) {
+  #news {
+    font-size: 20px;
+  }
+}

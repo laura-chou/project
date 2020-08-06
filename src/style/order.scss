@@ -1,0 +1,45 @@
+#order {
+  height: 100vh;
+  background: #F1F1E4;
+  .container {
+    padding: 2%;
+  }
+  .text {
+    display: flex;
+    justify-content: center;
+    margin: 2% 0 2% 0;
+  }
+  .info {
+    margin-bottom: 2%;
+    .col-4, .col-sm-2, .col-md-2, .col-lg-2, .col-xl-2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button {
+      margin-right: 3%;
+    }
+  }
+  .card {
+    font-size: 20px;
+  }
+  .count {
+    display: flex;
+    margin: 2% 0 2% 0;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+/* 裝置斷點控制區 --------------------------*/
+@media (min-width: 576px){
+  #order {
+  }
+}

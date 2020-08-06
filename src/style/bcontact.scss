@@ -1,0 +1,40 @@
+#bcontact{
+  height: 100vh;
+  background: #F1F1E4;
+  .container {
+    height: 100%;
+  }
+  h1 {
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .cont {
+    height: 90%;
+    font-size: 18px;
+  }
+  .pagination {
+    width: 100%;
+  }
+  .page-item.active .page-link {
+    background-color: #CCCC41;
+    border-color: #C0C103;
+  }
+  table td {
+    vertical-align: middle;
+    &:nth-child(1){
+      width: 20%;
+    }
+    &:nth-child(2){
+      width: 30%;
+    }
+    &:nth-child(3){
+      width: 30%;
+    }
+    &:nth-child(4){
+      width: 20%;
+    }
+  }
+}

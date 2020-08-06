@@ -1,0 +1,52 @@
+#location {
+  height: 100vh;
+  background: #F1F1E4;
+  border-bottom: 1px solid gray;
+  .container {
+    height: 100%;
+    padding: 3%;
+  }
+  h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+  }
+  .map {
+    width: 100%;
+    height: 70%;
+    .embed-responsive {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .row {
+    height: 20%;
+    width: 100%;
+    // background: rgba($color: #FFFF1F, $alpha: 0.5);
+    img {
+      width: 10%;
+      margin-right: 3%;
+    }
+    .col-12 {
+      width: 100%;
+      font-size: 18px;
+    }
+  }
+  
+}
+/* 裝置斷點控制區 --------------------------*/
+@media (min-width: 576px){
+  #location {
+    .map {
+      height: 80% !important;
+    }
+    .row {
+      height: 10% !important;
+    }
+    .col-12 {
+      width: 100%;
+      font-size: 20px;
+    }
+  }
+}

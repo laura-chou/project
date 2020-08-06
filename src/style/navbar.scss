@@ -1,0 +1,88 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+@import url(http://fonts.googleapis.com/earlyaccess/amstelvaralpha.css);
+#app {
+  font-family: "Segoe UI","微軟正黑體",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #000000;
+}
+#navbar {
+  // logo
+  .logo {
+    width: 40%;
+    height: 100%;
+  }
+  // navbar
+  .navbar-dark .navbar-nav .nav-link {
+    color: #000;
+    font-size: 20px;
+    &:hover{
+        color:#fff;
+        font-weight: bold;
+    }
+  }
+  .navbar-toggler {
+    border: none;
+  }
+  .navbar-toggler:hover,
+  .navbar-toggler:focus {
+    outline: none;
+  }
+  .navbar-dark .navbar-toggler-icon{
+    background-image: url('../assets/navigation_open.png');
+  }
+  .bg-info {
+    background-color: #c0c103 !important;
+  }
+  img {
+    margin-right: 2%;
+  }
+}
+
+// animation
+@keyframes rotate_right {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(90deg)}
+}
+@keyframes rotate_left {
+  0% {transform: rotate(90deg)}
+  100% {transform: rotate(0deg)}
+}
+// sweetalert
+.input {
+  img {
+    width: 8%;
+    margin-right: 3%;
+  }
+  #swal-input1,
+  #swal-input2{
+    width: 80%;
+  }
+}
+.swal2-styled.swal2-confirm,
+.swal2-styled.swal2-cancel {
+  background-color: #E0433C !important;
+  font-size: 16px !important;
+  font-weight: bold;
+}
+/* 裝置斷點控制區 --------------------------*/
+/* lg 992px 以上 */
+@media (min-width: 992px){
+  #navbar {
+    .logo {
+      width: 12%;
+    }
+    .navbar-nav{
+      width: 100%;
+      justify-content: flex-end;
+    }
+    .nav-item {
+      width: 100%
+    }
+    img {
+      margin-right: 5%;
+    }
+  }
+}
