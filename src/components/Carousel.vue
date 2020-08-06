@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import 'swiper/swiper-bundle.css'
+import '@/style/swiper-bundle.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   data () {
