@@ -40,8 +40,8 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
-import 'filepond/dist/filepond.min.css'
+import './style/filepond-plugin-image-preview.min.css'
+import './style/filepond.min.css'
 import 'wowjs/css/libs/animate.css'
 
 // axios 預設傳送認證資訊
