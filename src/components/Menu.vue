@@ -1,7 +1,7 @@
 <template>
   <div id="menu">
     <div class="container">
-      <h2 class="m-0" style="height:10%">菜單介紹</h2>
+      <h2>菜單介紹</h2>
       <div class="example-3d wow rollIn">
         <swiper class="swiper" :options="swiperOption">
           <swiper-slide v-for="m in menu" :key="m.name">
@@ -37,8 +37,8 @@ export default {
   computed: {
     menu () {
       const rever = []
-      for (let i = (this.$store.getters.menu.length - 1); i > 0; i--) {
-        rever.push(this.$store.getters.menu[i])
+      for (let i = (this.$store.getters.menu.length); i > 0; i--) {
+        rever.push(this.$store.getters.menu[i - 1])
       }
       return rever
     }
@@ -88,6 +88,7 @@ export default {
             }
           )
         }
+        console.log('原來的' + menus)
         this.$store.commit('menu', menus)
       })
       .catch(() => {

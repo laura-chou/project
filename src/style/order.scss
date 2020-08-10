@@ -1,5 +1,5 @@
 #order {
-  height: 100vh;
+  height: auto;
   background: #F1F1E4;
   .container {
     padding: 2%;
@@ -12,10 +12,11 @@
   }
   .info {
     margin-bottom: 2%;
+    width: 100%;
     .col-4, .col-sm-2, .col-md-2, .col-lg-2, .col-xl-2 {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
     }
   }
   .button {
@@ -42,5 +43,8 @@
 /* 裝置斷點控制區 --------------------------*/
 @media (min-width: 576px){
   #order {
+    .info {
+      width: 70%;
+    }
   }
 }

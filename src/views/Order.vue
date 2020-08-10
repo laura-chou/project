@@ -1,7 +1,7 @@
 <template>
   <div id="order">
     <div class="container">
-      <h2>預定快取</h2>
+      <h2>選擇品項</h2>
       <hr/>
       <div class="row">
         <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2 p-1" v-for="(m,index) in menu" :key="index">
@@ -32,25 +32,25 @@
       <hr/>
       <div class="row info">
         <div class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0">
-          <h5>姓名：</h5>
+          <h5 class="m-0">姓名：</h5>
         </div>
-        <div class="col-7 col-sm-7 col-md-5 col-lg-5 col-xl-5 p-0">
+        <div class="col-8 col-sm-10 col-md-10 col-lg-10 col-xl-10 p-0">
           <b-form-input v-model="name" placeholder="請輸入姓名" maxlength="4"></b-form-input>
         </div>
       </div>
       <div class="row info">
         <div class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0">
-          <h5>電話：</h5>
+          <h5 class="m-0">電話：</h5>
         </div>
-        <div class="col-7 col-sm-7 col-md-5 col-lg-5 col-xl-5 p-0">
+        <div class="col-8 col-sm-10 col-md-10 col-lg-10 col-xl-10 p-0">
           <b-form-input v-model="phone" placeholder="請輸入電話號碼" maxlength="10"></b-form-input>
         </div>
       </div>
       <div class="row info">
         <div class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-2 p-0">
-          <h5>快取時間：</h5>
+          <h5 class="m-0">取單時間：</h5>
         </div>
-        <div class="col-7 col-sm-7 col-md-5 col-lg-5 col-xl-5 p-0">
+        <div class="col-8 col-sm-10 col-md-10 col-lg-10 col-xl-10 p-0">
           <b-form-select v-model="selected" :options="options"></b-form-select>
         </div>
       </div>

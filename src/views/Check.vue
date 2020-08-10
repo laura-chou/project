@@ -11,7 +11,7 @@
         <h5>共<span> {{ amount }} </span>個</h5>
       </div>
       <div>
-        <h5>總金額<span> {{ money }} </span>元</h5>
+        <h5 class="m-0">總金額<span> {{ money }} </span>元</h5>
       </div>
     </div>
     <hr>

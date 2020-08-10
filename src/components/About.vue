@@ -1,12 +1,12 @@
 <template>
   <div id="about">
-      <div class="container">
-        <h2>關於我們</h2>
-        <div class="row">
-          <div class="col-12 col-lg-6 wow bounceInLeft"><b-img :src=aboutimg v-pswp="aboutimg" fluid alt="關於我們"></b-img></div>
-          <div class="col-12 col-lg-6 wow bounceInRight" style="text-align:left;"><p>{{ aboutintro }}</p></div>
-        </div>
+    <div class="container">
+      <h2>關於我們</h2>
+      <div class="row">
+        <div class="col-12 col-lg-6 wow bounceInLeft"><b-img :src=aboutimg v-pswp="aboutimg" fluid alt="關於我們"></b-img></div>
+        <div class="col-12 col-lg-6 wow bounceInRight" style="text-align:left;"><p>{{ aboutintro }}</p></div>
       </div>
+    </div>
   </div>
 </template>
 

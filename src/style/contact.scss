@@ -3,32 +3,30 @@
   background: #F1F1E4;
   .container{
     height: 100%;
-    padding: 20% 5% 20% 5%;
+    padding: 0 5% 0 5%;
   }
   h2 {
-    height: 15%;
+    height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .flex {
-    height: 85%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   #form {
-    position: relative;
-    width: 100%;
-    height: auto;
+    padding: 0 2% 0 2%;
   }
   input,
   textarea,
   #send{
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
-    color: #8F8F03;
+    color: #000;
     border: solid 1px #424215;
     outline: none;
   }
@@ -42,15 +40,14 @@
   }
   input {
     width: 100%;
-    height: 50px;
+    height: 70px;
     padding: 0px 15px 0px 15px;
     border-bottom: none;
   }
 
   textarea {
     width: 100%;
-    max-width: 100%;
-    height: 140px;
+    height: 200px;
     max-height: 100%;
     padding: 15px;
   }
@@ -75,17 +72,11 @@
 /* 裝置斷點控制區 --------------------------*/
 @media (min-width: 576px){
   #contact {
-    .container{
-      padding: 5% 10% 5% 10%;
-    }
     #form {
-      width: 100%;
+      padding: 0 20% 0 20%;
     }
     input {
-      height: 50px;
-    }
-    textarea {
-      height: 200px;
+      height: 60px;
     }
   }
   

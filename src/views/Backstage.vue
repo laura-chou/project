@@ -135,7 +135,8 @@ export default {
                 this.$store.commit('logout')
                 // 如果現在不是在首頁，跳到登出後的首頁
                 if (this.$route.path !== '/') {
-                  this.$router.push('/')
+                  // 有問題
+                  document.location.href = '/'
                 }
               })
             })()

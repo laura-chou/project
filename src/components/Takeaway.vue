@@ -1,9 +1,9 @@
 <template>
   <div id="takeaway">
     <div class="container">
+      <h2>線上預定</h2>
       <div class="flex wow bounceIn" :style="img">
         <div class="rule">
-          <h2>線上預定</h2>
           <b-img src="./img/warn.png"></b-img>
           <ol>
             <li>{{ notes[0] }}</li>

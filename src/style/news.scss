@@ -5,12 +5,15 @@
   .container {
     height: 100%;
   }
-  h2,
-  .content {
+  h2 {
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    margin: 0
+  }
+  .content {
+    height: 90%;
   }
   #my-table {
     height: 500px;

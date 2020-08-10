@@ -2,9 +2,12 @@
   height: 100vh;
   font-size: 20px;
   background: #F1F1E4;
-  display: flex;
   .container{
+    height: 100%;
     padding: 2%;
+    h2 {
+      margin: 8px 0 23px 0;
+    }
   }
   .total,
   .info {

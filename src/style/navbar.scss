@@ -1,8 +1,8 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
-@import url(https://fonts.googleapis.com/earlyaccess/amstelvaralpha.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap');
 #app {
-  font-family: "Segoe UI","微軟正黑體",sans-serif;
+  font-family: 'Noto Sans TC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -34,7 +34,8 @@
     background-image: url('../assets/navigation_open.png');
   }
   .bg-info {
-    background-color: #c0c103 !important;
+    background-color: #c0b536 !important;
+    //background-color: #758629 !important;
   }
   img {
     margin-right: 2%;

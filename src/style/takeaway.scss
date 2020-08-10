@@ -4,18 +4,20 @@
   border-bottom: 1px solid gray;
   .container {
     height: 100%;
-    padding: 2% 10% 2% 10%;
+    h2 {
+      height: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    width: 100%;
+    height: 80%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    height: 100%;
-    width: 100%;
     border-radius: 5%;
+    box-shadow: 1px 3px 10px black;
   }
   .rule {
     width: 100%;
@@ -23,24 +25,23 @@
     background: #fff;
     opacity: 0.9;
     border-radius: 5%;
-    box-shadow: 1px 5px 10px black;
+    font-size: 18px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
-    font-size: 18px;
-    text-align: left;
-    position: absolute;
-    h2 {
-      height: 10%;
-    }
+    padding: 0 10% 0 10%;
     img {
-      width: 10%;
-      margin: 1% 0 2% 0;
+      width: 20%;
     }
     ol {
       padding: 0;
-      margin: 10%;
+      margin: 0;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
       li {
         margin: 0 0 5% 0;
       }
@@ -51,10 +52,15 @@
   }
 }
 /* 裝置斷點控制區 --------------------------*/
-@media (min-width: 576px){
+@media (min-width: 992px){
   #takeaway {
     .container {
-      padding: 10%;
+      padding: 0 15% 0 15%;
+      .rule {
+        img {
+          width: 10%;
+        }
+      }
     }
   }
 }
