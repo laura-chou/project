@@ -61,7 +61,14 @@ export default {
             contactMessage.value = ''
           } else {
             // 不是就顯示回來的 message
-            alert(data.message)
+            (async () => {
+              await this.$swal.fire({
+                icon: 'error',
+                title: data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
           }
         })
         .catch(error => {

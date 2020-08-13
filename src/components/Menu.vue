@@ -36,11 +36,12 @@ export default {
   },
   computed: {
     menu () {
-      const rever = []
-      for (let i = (this.$store.getters.menu.length); i > 0; i--) {
-        rever.push(this.$store.getters.menu[i - 1])
-      }
-      return rever
+      return this.$store.getters.menu
+      // const rever = []
+      // for (let i = (this.$store.getters.menu.length); i > 0; i--) {
+      //   rever.push(this.$store.getters.menu[i - 1])
+      // }
+      // return rever
     }
   },
   data () {
@@ -88,11 +89,21 @@ export default {
             }
           )
         }
-        console.log('原來的' + menus)
-        this.$store.commit('menu', menus)
+        const rever = []
+        for (let i = (menus.length); i > 0; i--) {
+          rever.push(menus[i - 1])
+        }
+        this.$store.commit('menu', rever)
       })
       .catch(() => {
-        alert('發生錯誤')
+        (async () => {
+          await this.$swal.fire({
+            icon: 'error',
+            title: '發生錯誤',
+            allowOutsideClick: false,
+            confirmButtonText: '確定'
+          })
+        })()
       })
   }
 }

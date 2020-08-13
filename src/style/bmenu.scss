@@ -1,6 +1,5 @@
 #bmenu {
   height: 100vh;
-  background: #F1F1E4;
   .container {
     height: 100%;
   }
@@ -48,19 +47,13 @@
   }
 }
 
-.showModal{
-    opacity:1;
-    animation: show .25s;
-    transform: scale(1);
-    .modal-header {
-      display: none;
-    }
-    .modal-footer {
-      display: none;
-    }
+.modal-dialog {
+  .modal-header {
+    display: none;
   }
-.hidden {
-  display: none !important;
+  .modal-footer {
+    display: none;
+  }
 }
 
 @keyframes show {

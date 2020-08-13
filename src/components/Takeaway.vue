@@ -40,7 +40,7 @@ export default {
         (async () => {
           await this.$swal.fire({
             icon: 'warning',
-            title: '店家尚未開放快取',
+            title: '店家尚未開放預定',
             allowOutsideClick: false,
             confirmButtonText: '確定'
           })

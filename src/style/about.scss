@@ -29,7 +29,14 @@
     font-size: 18px;
   }
 }
-
+@media (max-width: 576px){
+  #about {
+    img{
+      width: 90%;
+      height: 90%;
+    }
+  }
+}
 @media (min-width: 992px){
   #about {
     p {

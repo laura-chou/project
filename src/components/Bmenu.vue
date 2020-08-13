@@ -35,13 +35,12 @@
           aria-controls="my-table"
         ></b-pagination>
         <div class="button">
-          <b-button id="btn" variant="danger" v-b-modal.modal1 @click="add">新增</b-button>
+          <b-button id="btn" variant="danger" @click="modalShow = !modalShow">新增</b-button>
         </div>
       </div>
       <div>
-        <b-modal id="modal1" @shown="shown"
+        <b-modal v-model="modalShow"
         no-fade
-        class="hidden"
         no-close-on-backdrop
         centered>
           <div>圖片：
@@ -107,6 +106,7 @@ export default {
           label: '編輯'
         }
       ],
+      modalShow: false,
       perPage: 5,
       currentPage: 1,
       items: this.$store.getters.menu,
@@ -134,10 +134,6 @@ export default {
     }
   },
   methods: {
-    add () {
-      const modal = document.getElementById('modal1___BV_modal_outer_')
-      modal.classList.remove('hidden')
-    },
     send () {
       const filepondassistant = document.getElementsByClassName('filepond--assistant')
       const fd = new FormData()
@@ -221,8 +217,7 @@ export default {
       this.cancel()
     },
     cancel () {
-      const modal = document.getElementById('modal1___BV_modal_outer_')
-      modal.classList.add('hidden')
+      this.modalShow = !this.modalShow
       this.name = ''
       this.notes = ''
       this.price = 0
@@ -331,10 +326,6 @@ export default {
           }
         })
       })()
-    },
-    shown: function () {
-      const modal = document.getElementById('modal1')
-      modal.classList.add('showModal')
     }
   }
 }

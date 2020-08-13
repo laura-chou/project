@@ -124,7 +124,14 @@ export default {
           .then(response => {
           })
           .catch(() => {
-            alert('發生錯誤')
+            (async () => {
+              await this.$swal.fire({
+                icon: 'error',
+                title: '發生錯誤',
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
           })
       }
     }

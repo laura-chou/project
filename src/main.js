@@ -20,7 +20,6 @@ import footerStyle from './style/footer.scss'
 import orderStyle from './style/order.scss'
 import checkStyle from './style/check.scss'
 import burgermenuStyle from './style/burgermenu.scss'
-import backstageStyle from './style/backstage.scss'
 import baboutStyle from './style/babout.scss'
 import btakeawayStyle from './style/btakeaway.scss'
 import botherStyle from './style/bother.scss'
@@ -79,7 +78,6 @@ new Vue({
   orderStyle,
   checkStyle,
   burgermenuStyle,
-  backstageStyle,
   baboutStyle,
   btakeawayStyle,
   botherStyle,

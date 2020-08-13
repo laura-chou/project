@@ -112,6 +112,12 @@ export default {
       }
     },
     cancel () {
+      for (const i in this.counts) {
+        this.counts[i] = 0
+      }
+      this.name = ''
+      this.phone = ''
+      this.selected = null
       this.$store.commit('orderCustomer', '')
       this.$store.commit('orderPhone', '')
       this.$store.commit('orderTime', null)

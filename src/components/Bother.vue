@@ -14,12 +14,12 @@
               <file-pond
                 name="logo"
                 ref="pond"
-                label-idle="選擇檔案或拖曳至此"
+                label-idle="選擇檔案或拖曳至此 ( 僅接受png檔 )"
                 allow-multiple="true"
                 max-files="1"
                 allowImageExifOrientation="false"
                 allowImagePreview="true"
-                accepted-file-types="image/*"
+                accepted-file-types="image/png"
                 max-file-size="1MB"
                 label-max-file-size-exceeded="檔案太大"
                 label-max-file-size="檔案不能超過{filesize}"
@@ -140,19 +140,19 @@
           <div class="col p-0 flex">
             <h4>注意事項</h4>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
+          <div class="row inputrow flex">
             <div class="col-1">1.</div>
             <div class="col-11 p-0">
               <b-form-input id="address" v-model="note1" :state=note1State :value=note1></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
+          <div class="row inputrow flex">
             <div class="col-1">2.</div>
             <div class="col-11 p-0">
               <b-form-input id="address" v-model="note2" :state=note2State :value=note2></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
+          <div class="row inputrow flex">
             <div class="col-1">3.</div>
             <div class="col-11 p-0">
               <b-form-input id="address" v-model="note3" :state=note3State :value=note3></b-form-input>
@@ -161,27 +161,27 @@
           <div class="col p-0 flex">
             <h4>頁尾</h4>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-1 p-0" style="text-align:right;">營業時間：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-10 col-xl-11 p-0">
+          <div class="row inputrow flex">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">營業時間：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
               <b-form-input id="address" v-model="opentime" :state=openState :value=opentime></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-1 p-0" style="text-align:right;">聯絡電話：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-10 col-xl-11 p-0">
+          <div class="row inputrow flex">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">聯絡電話：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
               <b-form-input id="address" v-model="phone" :state=phoneState :value=phone></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-1 p-0" style="text-align:right;">fb網址：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-10 col-xl-11 p-0">
+          <div class="row inputrow flex">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">fb網址：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
               <b-form-input id="address" v-model="fburl" :state=fbState :value=fburl></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex" style="text-align: right">
-            <div class="col-3 col-md-1 p-0">ig網址：</div>
-            <div class="col-9 col-md-11 p-0">
+          <div class="row inputrow flex">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">ig網址：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
               <b-form-input id="address" v-model="igurl" :state=igState :value=igurl></b-form-input>
             </div>
           </div>
@@ -379,7 +379,14 @@ export default {
         .then(response => {
         })
         .catch(() => {
-          alert('發生錯誤')
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '發生錯誤',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
         })
     }
   }

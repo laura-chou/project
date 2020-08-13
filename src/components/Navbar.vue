@@ -47,7 +47,14 @@ export default {
         this.$store.commit('otherId', response.data.other[0]._id)
       })
       .catch(() => {
-        alert('發生錯誤')
+        (async () => {
+          await this.$swal.fire({
+            icon: 'error',
+            title: '發生錯誤',
+            allowOutsideClick: false,
+            confirmButtonText: '確定'
+          })
+        })()
       })
   },
   methods: {
@@ -107,7 +114,14 @@ export default {
                   })()
                 } else {
                   // 不是就顯示回來的 message
-                  alert(data.message)
+                  (async () => {
+                    await this.$swal.fire({
+                      icon: 'error',
+                      title: data.message,
+                      allowOutsideClick: false,
+                      confirmButtonText: '確定'
+                    })
+                  })()
                 }
               })
               .catch(error => {
