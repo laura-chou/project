@@ -83,38 +83,87 @@ export default {
       }
     },
     heartbeat () {
-      this.axios.get(process.env.VUE_APP_APIURL + '/heartbeat')
+      this.axios.get(process.env.VUE_APP_APIURL + '/check_user')
         .then(response => {
-          const data = response.data
-          // 如果是登入中
-          if (this.user.length > 0) {
-            // 如果後端登入時間過期
-            if (!data) {
-              alert('登入時效已過')
-              // 前端登出
-              this.$store.commit('logout')
-              // 如果現在不是在首頁，跳到登出後的首頁
-              if (this.$route.path !== '/') {
-                this.$router.push('/')
+          this.axios.get(process.env.VUE_APP_APIURL + '/heartbeat')
+            .then(response => {
+              const data = response.data
+              // 如果是登入中
+              if (this.user.length > 0) {
+                // 如果後端登入時間過期
+                if (!data) {
+                  alert('登入時效已過')
+                  // 前端登出
+                  this.$store.commit('logout')
+                  // 如果現在不是在首頁，跳到登出後的首頁
+                  if (this.$route.path !== '/') {
+                    this.$router.push('/')
+                  }
+                }
               }
-            }
-          }
+            })
+            .catch(() => {
+              (async () => {
+                await this.$swal.fire({
+                  icon: 'error',
+                  title: '發生錯誤',
+                  allowOutsideClick: false,
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then((result) => {
+                  this.$store.commit('logout')
+                  // 如果現在不是在首頁，跳到登出後的首頁
+                  if (this.$route.path !== '/') {
+                    this.$router.push('/')
+                  }
+                })
+              })()
+            })
         })
         .catch(() => {
           (async () => {
             await this.$swal.fire({
               icon: 'error',
-              title: '發生錯誤',
+              title: '未登入',
               allowOutsideClick: false,
-              showCancelButton: true,
-              confirmButtonText: '確定'
-            }).then((result) => {
-              this.$store.commit('logout')
-              // 如果現在不是在首頁，跳到登出後的首頁
-              if (this.$route.path !== '/') {
-                this.$router.push('/')
-              }
+              showConfirmButton: false,
+              timer: 1500
             })
+            this.axios.delete(process.env.VUE_APP_APIURL + '/logout')
+              .then(response => {
+                const data = response.data
+                if (data.success) {
+                  // 呼叫 vuex 的登出
+                  this.$store.commit('logout')
+                  // 如果現在不是在首頁，跳到登出後的首頁
+                  if (this.$route.path !== '/') {
+                    // 有問題
+                    document.location.href = '/'
+                  }
+                } else {
+                  (async () => {
+                    await this.$swal.fire({
+                      icon: 'error',
+                      title: data.message,
+                      allowOutsideClick: false,
+                      showCancelButton: true,
+                      confirmButtonText: '確定'
+                    })
+                  })()
+                }
+              })
+              .catch(error => {
+                // 如果回來的狀態不是 200，顯示回來的 message
+                (async () => {
+                  await this.$swal.fire({
+                    icon: 'error',
+                    title: error.response.data.message,
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonText: '確定'
+                  })
+                })()
+              })
           })()
         })
     },

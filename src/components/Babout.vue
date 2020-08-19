@@ -63,9 +63,6 @@ export default {
     getimg () {
       const img = process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.about_img
       return img
-    },
-    nowfile () {
-      return this.$store.getters.about_img
     }
   },
   methods: {
@@ -86,48 +83,30 @@ export default {
         if (filepondassistant[0].innerHTML.includes('上傳完成')) {
           // FormData 可以同時傳送檔案和表單資料
           fd.append('image', this.file)
-        } else {
-          fd.append('image', this.nowfile)
         }
         fd.append('introduction', this.message)
-        // 新增
-        this.axios.post(process.env.VUE_APP_APIURL + '/add_about', fd, {
-          // 因為 axios 預設是送 json，所以要自己設定成 formdata
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(response => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'success',
-              title: response.data.message,
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            }).then((result) => {
-              this.isUpload = false
-              this.$store.commit('aboutImg', response.data.name)
-              this.$store.commit('aboutId', response.data._id)
-            })
-          })()
-        }).catch(error => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: error.response.data.message,
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
-        })
-        // 刪除
-        this.axios.delete(process.env.VUE_APP_APIURL + '/delete_about/' + this.getid)
+        this.axios.patch(process.env.VUE_APP_APIURL + '/update_about/' + this.getid, fd)
           .then(response => {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'success',
+                title: response.data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              }).then((result) => {
+                this.isUpload = false
+                if (response.data.result.image !== undefined) {
+                  this.$store.commit('aboutImg', response.data.result.image)
+                }
+                this.$store.commit('aboutIntro', response.data.result.introduction)
+              })
+            })()
           })
-          .catch(() => {
+          .catch(error => {
             (async () => {
               await this.$swal.fire({
                 icon: 'error',
-                title: '發生錯誤',
+                title: error.response.data.message,
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               })

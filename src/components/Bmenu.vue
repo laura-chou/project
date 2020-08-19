@@ -35,40 +35,98 @@
           aria-controls="my-table"
         ></b-pagination>
         <div class="button">
-          <b-button id="btn" variant="danger" @click="modalShow = !modalShow">新增</b-button>
+          <b-button id="btn" variant="danger" @click="addmodal = !addmodal">新增</b-button>
         </div>
       </div>
       <div>
-        <b-modal v-model="modalShow"
+        <b-modal v-model="addmodal"
         no-fade
         no-close-on-backdrop
         centered>
-          <div>圖片：
-            <file-pond
-              name="test"
-              ref="pond"
-              label-idle="選擇檔案或拖曳至此"
-              allow-multiple="true"
-              max-files="1"
-              allowImageExifOrientation="false"
-              allowImagePreview="true"
-              accepted-file-types="image/*"
-              max-file-size="1MB"
-              label-max-file-size-exceeded="檔案太大"
-              label-max-file-size="檔案不能超過{filesize}"
-              label-file-processing="上傳中"
-              label-file-processing-complete="上傳完成"
-              label-tap-to-undo="點擊刪除"
-              label-tap-to-cancel="點擊取消"
-              :server="myServer"
-            />
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">圖片：</div>
+            <div class="col-10">
+              <file-pond
+                name="add"
+                ref="pond"
+                label-idle="選擇檔案或拖曳至此"
+                allow-multiple="true"
+                max-files="1"
+                allowImageExifOrientation="false"
+                allowImagePreview="true"
+                accepted-file-types="image/*"
+                max-file-size="1MB"
+                label-max-file-size-exceeded="檔案太大"
+                label-max-file-size="檔案不能超過{filesize}"
+                label-file-processing="上傳中"
+                label-file-processing-complete="上傳完成"
+                label-tap-to-undo="點擊刪除"
+                label-tap-to-cancel="點擊取消"
+                :server="myServer"
+              />
+            </div>
           </div>
-          <div>名稱:<input id="add-name" v-model="name" type="text" class="swal2-input"></div>
-          <div>附註:<input id="add-notes" v-model="notes" type="text" class="swal2-input"></div>
-          <div>價格:<input id="add-price" v-model="price" type="number" min=1 class="swal2-input"></div>
-          <div class="swal2-actions">
-            <b-button class="swal2-styled swal2-cancel" variant="danger" @click="send">確定</b-button>
-            <b-button class="swal2-styled swal2-confirm" variant="danger" @click="cancel">取消</b-button>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">名稱：</div>
+            <div class="col-10"><input id="add-name" v-model="addname" type="text" class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">附註：</div>
+            <div class="col-10"><input id="add-notes" v-model="addnotes" type="text" class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">價格：</div>
+            <div class="col-10"><input id="add-price" v-model="addprice" type="number" min=1 class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 d-flex justify-content-end"><b-button variant="danger" @click="send('add')">確定</b-button></div>
+            <div class="col-6 d-flex justify-content-start"><b-button variant="danger" @click="cancel('add')">取消</b-button></div>
+          </div>
+        </b-modal>
+      </div>
+      <div>
+        <b-modal v-model="editmodal"
+        no-fade
+        no-close-on-backdrop
+        centered>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">圖片：</div>
+            <div class="col-10">
+              <file-pond
+                name="edit"
+                ref="pond"
+                label-idle="選擇檔案或拖曳至此"
+                allow-multiple="true"
+                max-files="1"
+                allowImageExifOrientation="false"
+                allowImagePreview="true"
+                accepted-file-types="image/*"
+                max-file-size="1MB"
+                label-max-file-size-exceeded="檔案太大"
+                label-max-file-size="檔案不能超過{filesize}"
+                label-file-processing="上傳中"
+                label-file-processing-complete="上傳完成"
+                label-tap-to-undo="點擊刪除"
+                label-tap-to-cancel="點擊取消"
+                :server="myServer"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">名稱：</div>
+            <div class="col-10"><input id="edit-icename" v-model="editname" type="text" class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">附註：</div>
+            <div class="col-10"><input id="add-notes" v-model="editnotes" type="text" class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-2 p-0 d-flex align-items-center justify-content-center">價格：</div>
+            <div class="col-10"><input id="add-price" v-model="editprice" type="number" min=1 class="swal2-input"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 d-flex justify-content-end"><b-button variant="danger" @click="send('edit')">確定</b-button></div>
+            <div class="col-6 d-flex justify-content-start"><b-button variant="danger" @click="cancel('edit')">取消</b-button></div>
           </div>
         </b-modal>
       </div>
@@ -106,14 +164,20 @@ export default {
           label: '編輯'
         }
       ],
-      modalShow: false,
+      addmodal: false,
+      editmodal: false,
       perPage: 5,
       currentPage: 1,
       items: this.$store.getters.menu,
       file: '',
-      name: '',
-      notes: '',
-      price: 0,
+      addname: '',
+      addnotes: '',
+      addprice: 0,
+      editid: '',
+      editname: '',
+      editnotes: '',
+      editprice: 0,
+      editindex: 0,
       myServer: {
         process: (fieldName, file, metadata, load) => {
           const btn = document.getElementById('btn')
@@ -134,93 +198,149 @@ export default {
     }
   },
   methods: {
-    send () {
+    send (mode) {
       const filepondassistant = document.getElementsByClassName('filepond--assistant')
       const fd = new FormData()
-      if (filepondassistant[0].innerHTML.includes('檔案太大')) {
-        (async () => {
-          await this.$swal.fire({
-            icon: 'error',
-            title: '檔案太大',
-            allowOutsideClick: false,
-            confirmButtonText: '確定'
-          })
-        })()
-      } else if (filepondassistant[0].innerHTML === '') {
-        (async () => {
-          await this.$swal.fire({
-            icon: 'error',
-            title: '未選擇檔案',
-            allowOutsideClick: false,
-            confirmButtonText: '確定'
-          })
-        })()
-      } else if (this.name === '' || this.notes === '') {
-        (async () => {
-          await this.$swal.fire({
-            icon: 'error',
-            title: '欄位未填寫',
-            allowOutsideClick: false,
-            confirmButtonText: '確定'
-          })
-        })()
-      } else if (this.price === 0) {
-        (async () => {
-          await this.$swal.fire({
-            icon: 'error',
-            title: '價格不可以為0',
-            allowOutsideClick: false,
-            confirmButtonText: '確定'
-          })
-        })()
-      } else {
-        if (filepondassistant[0].innerHTML.includes('上傳完成')) {
-          // FormData 可以同時傳送檔案和表單資料
-          fd.append('image', this.file)
-        } else {
-          fd.append('image', this.nowfile)
-        }
-        fd.append('name', this.name)
-        fd.append('notes', this.notes)
-        fd.append('price', this.price)
-        // 新增
-        this.axios.post(process.env.VUE_APP_APIURL + '/add_menu', fd, {
-          // 因為 axios 預設是送 json，所以要自己設定成 formdata
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(response => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'success',
-              title: response.data.message,
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            }).then((result) => {
-              this.isUpload = false
-              response.data.result.image = process.env.VUE_APP_APIURL + '/file/' + response.data.result.image
-              this.items.unshift(response.data.result)
-              this.$store.commit('menu', this.items)
-            })
-          })()
-        }).catch(error => {
+      if (mode === 'add') {
+        if (filepondassistant[0].innerHTML.includes('檔案太大')) {
           (async () => {
             await this.$swal.fire({
               icon: 'error',
-              title: error.response.data.message,
+              title: '檔案太大',
               allowOutsideClick: false,
               confirmButtonText: '確定'
             })
           })()
-        })
+        } else if (filepondassistant[0].innerHTML === '') {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '未選擇檔案',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        } else if (this.addname === '' || this.addnotes === '') {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '欄位未填寫',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        } else if (this.addprice === 0) {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '價格不可以為0',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        } else {
+          if (filepondassistant[0].innerHTML.includes('上傳完成')) {
+          // FormData 可以同時傳送檔案和表單資料
+            fd.append('image', this.file)
+          } else {
+            fd.append('image', this.nowfile)
+          }
+          fd.append('name', this.addname)
+          fd.append('notes', this.addnotes)
+          fd.append('price', this.addprice)
+          // 新增
+          this.axios.post(process.env.VUE_APP_APIURL + '/add_menu', fd, {
+          // 因為 axios 預設是送 json，所以要自己設定成 formdata
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(response => {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'success',
+                title: response.data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              }).then((result) => {
+                this.isUpload = false
+                response.data.result.image = process.env.VUE_APP_APIURL + '/file/' + response.data.result.image
+                this.items.unshift(response.data.result)
+                this.$store.commit('menu', this.items)
+              })
+            })()
+          }).catch(error => {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'error',
+                title: error.response.data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
+          })
+        }
+        this.cancel('add')
+      } else {
+        if (filepondassistant[0].innerHTML.includes('檔案太大')) {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '檔案太大',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        } else {
+          if (filepondassistant[0].innerHTML.includes('上傳完成')) {
+          // FormData 可以同時傳送檔案和表單資料
+            fd.append('image', this.file)
+          }
+          fd.append('name', this.editname)
+          fd.append('notes', this.editnotes)
+          fd.append('price', this.editprice)
+          this.axios.patch(process.env.VUE_APP_APIURL + '/update_menu/' + this.editid, fd)
+            .then(response => {
+              (async () => {
+                await this.$swal.fire({
+                  icon: 'success',
+                  title: response.data.message,
+                  allowOutsideClick: false,
+                  confirmButtonText: '確定'
+                }).then((result) => {
+                  if (response.data.result.image !== undefined) {
+                    this.items[this.editindex].image = process.env.VUE_APP_APIURL + '/file/' + response.data.result.image
+                  }
+                  this.items[this.editindex].name = response.data.result.name
+                  this.items[this.editindex].notes = response.data.result.notes
+                  this.items[this.editindex].price = response.data.result.price
+                  this.$store.commit('news', this.items)
+                })
+              })()
+            })
+            .catch(error => {
+              (async () => {
+                await this.$swal.fire({
+                  icon: 'error',
+                  title: error.response.data.message,
+                  allowOutsideClick: false,
+                  confirmButtonText: '確定'
+                })
+              })()
+            })
+        }
+        this.cancel('edit')
       }
-      this.cancel()
     },
-    cancel () {
-      this.modalShow = !this.modalShow
-      this.name = ''
-      this.notes = ''
-      this.price = 0
+    cancel (mode) {
+      if (mode === 'add') {
+        this.addmodal = !this.addmodal
+        this.addname = ''
+        this.addnotes = ''
+        this.addprice = 0
+      } else {
+        this.editmodal = !this.editmodal
+      }
+      this.file = ''
     },
     del (data) {
       (async () => {
@@ -261,71 +381,20 @@ export default {
       })()
     },
     edit (data) {
-      (async () => {
-        const id = data.item._id
-        let index = 0
-        for (const i in this.items) {
-          if (this.items[i]._id === id) {
-            index = i
-            break
-          }
+      this.editmodal = !this.editmodal
+      const id = data.item._id
+      let index = 0
+      for (const i in this.items) {
+        if (this.items[i]._id === id) {
+          index = i
+          break
         }
-        const icename = this.items[index].name
-        const note = this.items[index].notes
-        const price = this.items[index].price
-        await this.$swal.fire({
-          allowOutsideClick: false,
-          html: `<div>名稱:<input id="edit-icename" type='text' class="swal2-input" value=${icename}></input></div>` +
-          `<div>附註:<input id="edit-note" type="text" class="swal2-input" value=${note}></div>` +
-          `<div>價格:<input id="edit-price" type="number" class="swal2-input" value=${price}></div>`,
-          focusConfirm: false,
-          showCancelButton: true,
-          confirmButtonText: '儲存',
-          cancelButtonText: '取消',
-          preConfirm: () => {
-            return [
-              document.getElementById('edit-icename').value,
-              document.getElementById('edit-note').value,
-              document.getElementById('edit-price').value
-            ]
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            const id = this.items[index]._id
-            const send = {
-              name: result.value[0],
-              notes: result.value[1],
-              price: result.value[2]
-            }
-            this.axios.patch(process.env.VUE_APP_APIURL + '/update_menu/' + id, send)
-              .then(response => {
-                (async () => {
-                  await this.$swal.fire({
-                    icon: 'success',
-                    title: response.data.message,
-                    allowOutsideClick: false,
-                    confirmButtonText: '確定'
-                  }).then((result) => {
-                    this.items[index].name = response.data.result.name
-                    this.items[index].notes = response.data.result.notes
-                    this.items[index].price = response.data.result.price
-                    this.$store.commit('news', this.items)
-                  })
-                })()
-              })
-              .catch(error => {
-                (async () => {
-                  await this.$swal.fire({
-                    icon: 'error',
-                    title: error.response.data.message,
-                    allowOutsideClick: false,
-                    confirmButtonText: '確定'
-                  })
-                })()
-              })
-          }
-        })
-      })()
+      }
+      this.editid = this.items[index]._id
+      this.editname = this.items[index].name
+      this.editnotes = this.items[index].notes
+      this.editprice = this.items[index].price
+      this.editindex = index
     }
   }
 }

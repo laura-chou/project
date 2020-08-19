@@ -42,6 +42,8 @@ import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size'
 import './style/filepond-plugin-image-preview.min.css'
 import './style/filepond.min.css'
 import 'wowjs/css/libs/animate.css'
+import Textra from 'vue-textra'
+import VueScrollTo from 'vue-scrollto'
 
 // axios 預設傳送認證資訊
 axios.defaults.withCredentials = true
@@ -51,6 +53,8 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueSweetalert2)
 Vue.use(Slide)
+Vue.use(Textra)
+Vue.use(VueScrollTo)
 Vue.config.productionTip = false
 library.add(faPlus, faMinus, faTimes, faTrashAlt, faEdit, faClipboardList)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -62,7 +66,6 @@ const FilePond = vueFilePond(
   FilePondPluginFileValidateSize
 )
 Vue.component('file-pond', FilePond)
-
 new Vue({
   router,
   store,

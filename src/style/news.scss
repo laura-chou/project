@@ -4,16 +4,16 @@
   border-bottom: 1px solid gray;
   .container {
     height: 100%;
-  }
-  h2 {
-    height: 10%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 0
+    align-items: center;
   }
   .content {
-    height: 90%;
+    width: 100%;
+    h2 {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
   }
   #my-table {
     height: 500px;

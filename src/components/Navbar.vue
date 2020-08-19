@@ -2,17 +2,17 @@
   <div id="navbar" class="fixed-top">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <div class="logo">
-          <a href="/"><b-img :src="logo" fluid alt="艸頭黃"></b-img></a>
+          <a href="#" v-scroll-to="{ el: '#navbar', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" ><b-img :src="logo" fluid alt="艸頭黃"></b-img></a>
       </div>
-      <b-navbar-toggle id="navbar-toggle" target="nav-collapse" @click="navbar"></b-navbar-toggle>
+      <b-navbar-toggle id="navbar-toggle" target="nav-collapse" @click="navbartoggle"></b-navbar-toggle>
       <b-collapse id="nav-collapse" class="justify-content-end" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#about" @click="navbar"><b-img src="./img/about.png" alt="關於我們"></b-img>關於我們</b-nav-item>
-          <b-nav-item href="#news" @click="navbar"><b-img src="./img/new.png" alt="最新消息"></b-img>最新消息</b-nav-item>
-          <b-nav-item href="#menu" @click="navbar"><b-img src="./img/menu.png" alt="菜單介紹"></b-img>菜單介紹</b-nav-item>
-          <b-nav-item href="#location" @click="navbar"><b-img src="./img/location.png" alt="店家位置"></b-img>店家位置</b-nav-item>
-          <b-nav-item href="#takeaway" @click="navbar"><b-img src="./img/take-away.png" alt="預定快取"></b-img>線上預定</b-nav-item>
-          <b-nav-item href="#contact" @click="navbar"><b-img src="./img/message.png" alt="聯絡我們"></b-img>聯絡我們</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#about', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/about.png" alt="關於我們"></b-img>關於我們</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#news', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/new.png" alt="最新消息"></b-img>最新消息</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#menu', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/menu.png" alt="菜單介紹"></b-img>菜單介紹</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#location', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/location.png" alt="店家位置"></b-img>店家位置</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#takeaway', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/take-away.png" alt="預定快取"></b-img>線上預定</b-nav-item>
+          <b-nav-item href="#" v-scroll-to="{ el: '#contact', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/message.png" alt="聯絡我們"></b-img>聯絡我們</b-nav-item>
           <b-nav-item @click="signin"><b-img src="./img/employee.png" alt="員工登入"></b-img>員工登入</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -58,7 +58,20 @@ export default {
       })
   },
   methods: {
-    navbar () {
+    navbaritem () {
+      const navbaricon = document.getElementsByClassName('navbar-toggler-icon')
+      navbaricon[0].style.animation = ''
+      if (this.toggle) {
+        navbaricon[0].style.animation = 'rotate_right 1s ease 1'
+        navbaricon[0].style.backgroundImage = 'url("./img/navigation_close.png")'
+        this.toggle = false
+      } else {
+        navbaricon[0].style.animation = 'rotate_left 1s ease 1'
+        navbaricon[0].style.backgroundImage = 'url("./img/navigation_open.png")'
+        this.toggle = true
+      }
+    },
+    navbartoggle () {
       const navbaricon = document.getElementsByClassName('navbar-toggler-icon')
       navbaricon[0].style.animation = ''
       if (this.toggle) {

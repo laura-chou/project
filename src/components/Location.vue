@@ -1,8 +1,8 @@
 <template>
   <div id="location">
     <div class="container">
-      <h2>店家位置</h2>
       <div class="row">
+        <h2>店家位置</h2>
         <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 wow slideInLeft">
           <b-img src="./img/bus.png" fluid></b-img>
           <span>{{ locationbus }}</span>

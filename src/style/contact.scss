@@ -3,10 +3,6 @@
   background: #F1F1E4;
   .container{
     height: 100%;
-    padding: 0 5% 0 5%;
-  }
-  h2 {
-    height: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,9 +13,12 @@
     justify-content: center;
     align-items: center;
   }
-  
   #form {
     padding: 0 2% 0 2%;
+    h2 {
+      font-weight: 600;
+      margin-bottom: 5%;
+    }
   }
   input,
   textarea,
@@ -73,11 +72,10 @@
 @media (min-width: 576px){
   #contact {
     #form {
-      padding: 0 20% 0 20%;
+      padding: 0 10% 0 10%;
     }
     input {
       height: 60px;
     }
-  }
-  
+  } 
 }

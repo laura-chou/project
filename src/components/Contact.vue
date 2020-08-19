@@ -1,13 +1,13 @@
 <template>
   <div id="contact">
     <div class="container">
-      <h2>聯絡我們</h2>
-      <div class="flex wow lightSpeedIn">
+      <div class="flex wow tada">
         <form method="post" id="form" class="topBefore">
-            <input id="name" type="text" placeholder="姓名" required>
-            <input id="email" type="text" placeholder="電子信箱" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$">
-            <textarea id="message" type="text" placeholder="留言" required></textarea>
-            <input type="submit" value=送出 id="send" @click="send">
+          <h2>聯絡我們</h2>
+          <input id="name" type="text" placeholder="姓名" required>
+          <input id="email" type="text" placeholder="電子信箱" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$">
+          <textarea id="message" type="text" placeholder="留言" required></textarea>
+          <input type="submit" value=送出 id="send" @click="send">
         </form>
       </div>
     </div>

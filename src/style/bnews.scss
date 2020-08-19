@@ -4,14 +4,14 @@
     height: 100%;
   }
   h1 {
-    height: 10%;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
   }
   .new {
-    height: 90%;
+    height: 85%;
     font-size: 18px;
   }
   .pagination {
@@ -21,6 +21,10 @@
     background-color: #CCCC41;
     border-color: #C0C103;
   }
+}
+#add-content,
+#edit-content {
+  height: 100px;
 }
 #menu-table{
   height: 50%;

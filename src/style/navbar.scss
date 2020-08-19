@@ -17,7 +17,7 @@ body,html {
 #navbar {
   // logo
   .logo {
-    width: 40%;
+    width: 35%;
     height: 100%;
   }
   // navbar
@@ -74,7 +74,32 @@ body,html {
   font-size: 16px !important;
   font-weight: bold;
 }
+.navcollapse_open {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* 裝置斷點控制區 --------------------------*/
+@media (max-width: 992px){
+  #navbar {
+    #nav-collapse {
+      height: 100vh;
+    }
+    .navbar-nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .nav-item {
+      width: 100%;
+      height: 12vh;
+      line-height: 12vh;
+      font-size: 22px
+    }
+  }
+}
 /* lg 992px 以上 */
 @media (min-width: 992px){
   #navbar {

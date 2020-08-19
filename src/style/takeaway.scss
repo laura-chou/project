@@ -4,12 +4,9 @@
   border-bottom: 1px solid gray;
   .container {
     height: 100%;
-    h2 {
-      height: 10%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .flex {
     width: 100%;
@@ -31,8 +28,11 @@
     justify-content: space-around;
     flex-direction: column;
     padding: 0 10% 0 10%;
+    h2{
+      font-weight: 600;
+    }
     img {
-      width: 20%;
+      width: 12%;
     }
     ol {
       padding: 0;
@@ -56,11 +56,6 @@
   #takeaway {
     .container {
       padding: 0 15% 0 15%;
-      .rule {
-        img {
-          width: 10%;
-        }
-      }
     }
   }
 }

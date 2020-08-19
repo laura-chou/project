@@ -1,9 +1,9 @@
 <template>
   <div id="news">
     <div class="container">
-      <h2>最新消息</h2>
-      <div class="content wow pulse">
-        <b-table id="my-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+      <div class="content">
+        <h2>最新消息</h2>
+        <b-table id="my-table" class="wow fadeInUp" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
           <template v-slot:cell(title)="data">
             <a href="javascript:void(0)" @click="detail(data.value)">{{ data.value }}</a>
           </template>

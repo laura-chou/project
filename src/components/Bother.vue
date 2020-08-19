@@ -3,7 +3,7 @@
       <h1>其他</h1>
       <div class="container">
         <div class="col p-0 flex">
-          <h4>LOGO</h4>
+          <h4 class="m-0">LOGO</h4>
         </div>
         <b-form @submit="submit" class="form">
           <div class="row">
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="col p-0 flex">
-            <h4>輪播圖</h4>
+            <h4 class="m-0">輪播圖</h4>
           </div>
           <div class="row" style="margin-bottom:1%">
             <div class="col-6 p-0 m-0 flex">
@@ -110,7 +110,7 @@
             </div>
           </div>
           <div class="col p-0 flex">
-            <h4>線上預訂</h4>
+            <h4 class="m-0">線上預訂</h4>
           </div>
           <div class="row">
             <div class="col-6 p-0 m-0 flex">
@@ -138,50 +138,50 @@
             </div>
           </div>
           <div class="col p-0 flex">
-            <h4>注意事項</h4>
+            <h4 class="m-0">注意事項</h4>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-1">1.</div>
-            <div class="col-11 p-0">
+          <div class="row inputrow">
+            <div class="col-1 p-0 d-flex justify-content-center align-items-center">1.</div>
+            <div class="col-11 pl-0">
               <b-form-input id="address" v-model="note1" :state=note1State :value=note1></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-1">2.</div>
-            <div class="col-11 p-0">
+          <div class="row inputrow">
+            <div class="col-1 p-0 d-flex justify-content-center align-items-center">2.</div>
+            <div class="col-11 pl-0">
               <b-form-input id="address" v-model="note2" :state=note2State :value=note2></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-1">3.</div>
-            <div class="col-11 p-0">
+          <div class="row inputrow">
+            <div class="col-1 p-0 d-flex justify-content-center align-items-center">3.</div>
+            <div class="col-11 pl-0">
               <b-form-input id="address" v-model="note3" :state=note3State :value=note3></b-form-input>
             </div>
           </div>
           <div class="col p-0 flex">
-            <h4>頁尾</h4>
+            <h4 class="m-0">頁尾</h4>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">營業時間：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
+          <div class="row inputrow">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 d-flex justify-content-end align-items-center">營業時間：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 pl-0">
               <b-form-input id="address" v-model="opentime" :state=openState :value=opentime></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">聯絡電話：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
+          <div class="row inputrow">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 d-flex justify-content-end align-items-center">聯絡電話：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 pl-0">
               <b-form-input id="address" v-model="phone" :state=phoneState :value=phone></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">fb網址：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
+          <div class="row inputrow">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 d-flex justify-content-end align-items-center">fb網址：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 pl-0">
               <b-form-input id="address" v-model="fburl" :state=fbState :value=fburl></b-form-input>
             </div>
           </div>
-          <div class="row inputrow flex">
-            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 text-right">ig網址：</div>
-            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 p-0">
+          <div class="row inputrow">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0 d-flex justify-content-end align-items-center">ig網址：</div>
+            <div class="col-9 col-sm-10 col-md-10 col-lg-11 col-xl-11 pl-0">
               <b-form-input id="address" v-model="igurl" :state=igState :value=igurl></b-form-input>
             </div>
           </div>
@@ -319,10 +319,12 @@ export default {
       }
       if (!toobig) {
         const filename = [this.nowlogo, this.nowcarousel1, this.nowcarousel2, this.nowcarousel3, this.nowtakeaway]
+        const allimg = []
         for (let i = 0; i < filepondassistant.length; i++) {
           if (filepondassistant[i].innerHTML.includes('上傳完成')) {
             fd.append('image', this.file[i])
           } else {
+            allimg.push(filename[i])
             fd.append('image', filename[i])
           }
         }
@@ -333,61 +335,42 @@ export default {
         fd.append('phone', this.phone)
         fd.append('fb', this.fburl)
         fd.append('ig', this.igurl)
-        // 新增
-        this.axios.post(process.env.VUE_APP_APIURL + '/add_other', fd, {
-          // 因為 axios 預設是送 json，所以要自己設定成 formdata
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(response => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'success',
-              title: response.data.message,
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            }).then((result) => {
-              for (const i in this.isUpload) {
-                if (this.isUpload[i] === true) {
-                  this.isUpload[i] = false
+        this.axios.patch(process.env.VUE_APP_APIURL + '/update_other/' + this.getid, fd)
+          .then(response => {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'success',
+                title: response.data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              }).then((result) => {
+                for (const i in this.isUpload) {
+                  if (this.isUpload[i] === true) {
+                    this.isUpload[i] = false
+                  }
                 }
-              }
-              this.$store.commit('logo', response.data.other.logo_img)
-              this.$store.commit('carousel', response.data.other.carousel)
-              this.$store.commit('takeawayImg', response.data.other.take_away_img)
-              this.$store.commit('takeawayNotes', response.data.other.take_away_notes)
-              this.$store.commit('openTime', response.data.other.open_time)
-              this.$store.commit('phone', response.data.other.phone)
-              this.$store.commit('fb', response.data.other.fb)
-              this.$store.commit('ig', response.data.other.ig)
-              this.$store.commit('otherId', response.data.other._id)
-            })
-          })()
-        }).catch(error => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: error.response.data.message,
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
-        })
+                this.$store.commit('logo', response.data.result.logo_img)
+                this.$store.commit('carousel', response.data.result.carousel)
+                this.$store.commit('takeawayImg', response.data.result.take_away_img)
+                this.$store.commit('takeawayNotes', response.data.result.take_away_notes)
+                this.$store.commit('openTime', response.data.result.open_time)
+                this.$store.commit('phone', response.data.result.phone)
+                this.$store.commit('fb', response.data.result.fb)
+                this.$store.commit('ig', response.data.result.ig)
+                this.$store.commit('otherId', response.data.result._id)
+              })
+            })()
+          }).catch(error => {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'error',
+                title: error.response.data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
+          })
       }
-      // 刪除
-      this.axios.delete(process.env.VUE_APP_APIURL + '/delete_other/' + this.getid)
-        .then(response => {
-        })
-        .catch(() => {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '發生錯誤',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
-        })
     }
   }
 }

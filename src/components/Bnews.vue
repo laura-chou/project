@@ -75,10 +75,22 @@ export default {
       (async () => {
         await this.$swal.fire({
           allowOutsideClick: false,
-          html: `<div>日期:<input id="add-date" type='date' value=${this.getTodayDate}></input></div>` +
-          '<div>標題:<input id="add-title" type="text" class="swal2-input"></div><hr>' +
-          '<div>內容:<textarea id="add-content" type="text" class="swal2-input"></textarea></div>' +
-          '<div>網址:<input id="add-url" type="text" class="swal2-input"></div>',
+          html: `<div class="row">
+                  <div class="col-2 p-0">日期:</div>
+                  <div class="col-10 p-0 d-flex align-items-left justify-content-start"><input id="add-date" type='date' value=${this.getTodayDate}></input></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">標題:</div>
+                  <div class="col-10 p-0"><input id="add-title" type="text" class="swal2-input"></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">內容:</div>
+                  <div class="col-10 p-0"><textarea id="add-content" type="text" class="swal2-input"></textarea></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">網址:</div>
+                  <div class="col-10 p-0"><input id="add-url" type="text" class="swal2-input"></div>
+                </div>`,
           focusConfirm: false,
           showCancelButton: true,
           confirmButtonText: '新增',
@@ -192,10 +204,22 @@ export default {
         const url = this.items[index].url
         await this.$swal.fire({
           allowOutsideClick: false,
-          html: `<div>日期:<input id="edit-date" type='date' value=${date}></input></div>` +
-          `<div>標題:<input id="edit-title" type="text" class="swal2-input" value=${title}></div><hr>` +
-          `<div>內容:<textarea id="edit-content" type="text" class="swal2-input">${content}</textarea></div>` +
-          `<div>網址:<input id="edit-url" type="text" class="swal2-input" value=${url}></div>`,
+          html: `<div class="row">
+                  <div class="col-2 p-0">日期：</div>
+                  <div class="col-10 p-0 d-flex align-items-left justify-content-start"><input id="edit-date" type='date' value=${date}></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">標題：</div>
+                  <div class="col-10 p-0 d-flex align-items-left justify-content-start"><input id="edit-title" type="text" class="swal2-input" value=${title}></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">內容：</div>
+                  <div class="col-10 p-0 d-flex align-items-left justify-content-start"><textarea id="edit-content" type="text" class="swal2-input">${content}</textarea></div>
+                </div>` +
+                `<div class="row">
+                  <div class="col-2 p-0 d-flex align-items-center justify-content-center">網址：</div>
+                  <div class="col-10 p-0 d-flex align-items-left justify-content-start"><input id="edit-url" type="text" class="swal2-input" value=${url}></div>
+                </div>`,
           focusConfirm: false,
           showCancelButton: true,
           confirmButtonText: '儲存',

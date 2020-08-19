@@ -4,7 +4,7 @@
     height: 100%;
   }
   h1 {
-    height: 10vh;
+    height: 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,6 +15,9 @@
   }
   .inputrow {
     height: 50px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
   }
   .filepond--wrapper {
     width: 100%;
@@ -34,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1% 0 1% 0;
+    margin: 2% 0 2% 0;
     position: relative;
     .imgstyle {
       position: absolute;

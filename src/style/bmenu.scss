@@ -4,10 +4,10 @@
     height: 100%;
   }
   .menu {
-    height: 90%;
+    height: 85%;
   }
   h1 {
-    height: 10%;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,6 +53,9 @@
   }
   .modal-footer {
     display: none;
+  }
+  .col-10 {
+    padding-left: 0;
   }
 }
 

@@ -1,25 +1,28 @@
 <template>
   <div id="menu">
     <div class="container">
-      <h2>菜單介紹</h2>
-      <div class="example-3d wow rollIn">
-        <swiper class="swiper" :options="swiperOption">
-          <swiper-slide v-for="m in menu" :key="m.name">
-            <Photoswipe>
-              <b-col md="12">{{m.name}}</b-col>
-              <b-col md="12" class="p-0">
-                <b-img :src='m.image' v-pswp="m.image" alt="Image" class="rounded-0 m-0 h-100"></b-img>
-              </b-col>
-              <b-col md="12">
-                <div>{{m.notes}}</div>
-              </b-col>
-              <b-col md="12">
-                <span>$ {{m.price}}</span>
-              </b-col>
-            </Photoswipe>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
+      <div class="swiper3d">
+        <h2>菜單介紹</h2>
+        <div class="example-3d wow pulse
+">
+          <swiper class="swiper" :options="swiperOption">
+            <swiper-slide v-for="m in menu" :key="m.name">
+              <Photoswipe>
+                <b-col md="12">{{m.name}}</b-col>
+                <b-col md="12" class="p-0">
+                  <b-img :src='m.image' v-pswp="m.image" alt="Image" class="rounded-0 m-0 h-100"></b-img>
+                </b-col>
+                <b-col md="12">
+                  <div>{{m.notes}}</div>
+                </b-col>
+                <b-col md="12">
+                  <span>$ {{m.price}}</span>
+                </b-col>
+              </Photoswipe>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
       </div>
     </div>
   </div>
@@ -37,11 +40,6 @@ export default {
   computed: {
     menu () {
       return this.$store.getters.menu
-      // const rever = []
-      // for (let i = (this.$store.getters.menu.length); i > 0; i--) {
-      //   rever.push(this.$store.getters.menu[i - 1])
-      // }
-      // return rever
     }
   },
   data () {
