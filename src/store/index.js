@@ -25,7 +25,7 @@ export default new Vuex.Store({
     locationAddress: '',
     locationBus: '',
     locationMetro: '',
-    // 預定快取 (圖片、注意事項、訂單)
+    // 預定訂單 (圖片、注意事項、訂單)
     takeawayImg: '',
     takeawayNotes: [],
     // 快取訂單(訂購人、電話、時間、項目、數量)
@@ -106,7 +106,7 @@ export default new Vuex.Store({
     order_count (state) {
       return state.orderCount
     },
-    // 預定快取 (圖片、注意事項)
+    // 預定訂單 (圖片、注意事項)
     takeaway_img (state) {
       return state.takeawayImg
     },
@@ -186,7 +186,7 @@ export default new Vuex.Store({
     locationMetro (state, data) {
       state.locationMetro = data
     },
-    // 預定快取 (圖片、注意事項)
+    // 預定訂單 (圖片、注意事項)
     takeawayImg (state, data) {
       state.takeawayImg = data
     },

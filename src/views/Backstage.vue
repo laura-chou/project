@@ -55,7 +55,8 @@ export default {
         slide: { buttonText: 'Slide' }
       },
       side: 'left',
-      currentMenu: 'slide'
+      currentMenu: 'slide',
+      islogin: ''
     }
   },
   components: {
@@ -92,13 +93,22 @@ export default {
               if (this.user.length > 0) {
                 // 如果後端登入時間過期
                 if (!data) {
-                  alert('登入時效已過')
-                  // 前端登出
-                  this.$store.commit('logout')
-                  // 如果現在不是在首頁，跳到登出後的首頁
-                  if (this.$route.path !== '/') {
-                    this.$router.push('/')
-                  }
+                  (async () => {
+                    await this.$swal.fire({
+                      icon: 'error',
+                      title: '登入時效已過',
+                      allowOutsideClick: false,
+                      showConfirmButton: false,
+                      timer: 1500
+                    }).then((result) => {
+                      this.$store.commit('logout')
+                      // 如果現在不是在首頁，跳到登出後的首頁
+                      if (this.$route.path !== '/') {
+                        this.$router.push('/')
+                        clearInterval(this.islogin)
+                      }
+                    })
+                  })()
                 }
               }
             })
@@ -115,6 +125,7 @@ export default {
                   // 如果現在不是在首頁，跳到登出後的首頁
                   if (this.$route.path !== '/') {
                     this.$router.push('/')
+                    clearInterval(this.islogin)
                   }
                 })
               })()
@@ -137,8 +148,8 @@ export default {
                   this.$store.commit('logout')
                   // 如果現在不是在首頁，跳到登出後的首頁
                   if (this.$route.path !== '/') {
-                    // 有問題
-                    document.location.href = '/'
+                    this.$router.push('/')
+                    clearInterval(this.islogin)
                   }
                 } else {
                   (async () => {
@@ -184,8 +195,8 @@ export default {
                 this.$store.commit('logout')
                 // 如果現在不是在首頁，跳到登出後的首頁
                 if (this.$route.path !== '/') {
-                  // 有問題
-                  document.location.href = '/'
+                  this.$router.push('/')
+                  clearInterval(this.islogin)
                 }
               })
             })()
@@ -217,7 +228,7 @@ export default {
   },
   mounted () {
     this.heartbeat()
-    setInterval(() => {
+    this.islogin = setInterval(() => {
       this.heartbeat()
     }, 1000 * 5)
   }

@@ -1,24 +1,41 @@
-# front
+# 艸頭黃
+### 艸頭黃是一間位於土城區的冰品店
+## 前台功能
+#### 1. 店家介紹
+#### 2. 最新消息
+#### 3. 菜單介紹
+#### 4. 店家位置
+#### 5. 線上預訂
+#### 6. 聯絡店家
+#### 7. 店家管理登入
+![](home.jpg)
 
-## Project setup
-```
-npm install
-```
+## 店家管理功能 (管理前台)
+### 店家介紹
+ 1. 文字、圖片編輯
+### 最新消息
+ 1. 新增
+ 2. 文字編輯
+ 3. 刪除
+### 菜單介紹
+ 1. 新增
+ 2. 文字、圖片編輯
+ 3. 刪除
+### 店家位置
+ 1. 文字編輯
+### 預訂訂單
+ 1. 接單開關
+ 2. 訂單資訊 ( 只會顯示當天的訂單，每5分鐘向後台抓一次資料 )
+ 3. 刪除訂單
+### 聯絡店家
+ 1. 顯示聯絡人的詳細資訊
+ 2. 刪除聯絡人
+### 其他
+ 1. 輪播圖、線上預訂、logo圖片更換
+ 2. 線上預訂的注意事項文字編輯
+ 3. 頁尾 (footer) 文字編輯以及社群網站網址更換
+### 登出
+![](management.jpg)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Demo
+https://laura-chou.github.io/project

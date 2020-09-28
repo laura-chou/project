@@ -13,7 +13,7 @@
           <b-nav-item href="#" v-scroll-to="{ el: '#location', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/location.png" alt="店家位置"></b-img>店家位置</b-nav-item>
           <b-nav-item href="#" v-scroll-to="{ el: '#takeaway', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/take-away.png" alt="預定快取"></b-img>線上預定</b-nav-item>
           <b-nav-item href="#" v-scroll-to="{ el: '#contact', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" @click="navbaritem"><b-img src="./img/message.png" alt="聯絡我們"></b-img>聯絡我們</b-nav-item>
-          <b-nav-item @click="signin"><b-img src="./img/employee.png" alt="員工登入"></b-img>員工登入</b-nav-item>
+          <b-nav-item @click="signin"><b-img src="./img/employee.png" alt="店家管理"></b-img>店家管理</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -123,6 +123,7 @@ export default {
                       confirmButtonText: '確定'
                     }).then((result) => {
                       this.$router.push('backstage')
+                      this.$store.commit('login', account)
                     })
                   })()
                 } else {
