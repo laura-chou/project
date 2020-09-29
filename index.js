@@ -396,7 +396,7 @@ app.delete('/delete_news/:id', async (req, res) => {
       res.send({ success: true, message: '找不到資料' })
     } else {
       res.status(200)
-      res.send({ success: true, message: '刪除成功', result })
+      res.send({ success: true, message: '刪除成功' })
     }
   } catch (error) {
     if (error.name === 'CastError') {
@@ -450,7 +450,7 @@ app.post('/add_menu', async (req, res) => {
           }
         )
         res.status(200)
-        res.send({ success: true, message: '儲存成功', result, _id: result._id })
+        res.send({ success: true, message: '儲存成功', result })
       } catch (error) {
         if (error.name === 'ValidationError') {
           // 資料格式錯誤
@@ -685,7 +685,7 @@ app.delete('/delete_takeaway/:id', async (req, res) => {
       res.send({ success: true, message: '找不到資料' })
     } else {
       res.status(200)
-      res.send({ success: true, message: '刪除成功', result })
+      res.send({ success: true, message: '刪除成功' })
     }
   } catch (error) {
     if (error.name === 'CastError') {
@@ -758,7 +758,7 @@ app.delete('/delete_contact/:id', async (req, res) => {
       res.send({ success: true, message: '找不到資料' })
     } else {
       res.status(200)
-      res.send({ success: true, message: '刪除成功', result })
+      res.send({ success: true, message: '刪除成功' })
     }
   } catch (error) {
     if (error.name === 'CastError') {
