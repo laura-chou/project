@@ -112,6 +112,7 @@ app.listen(process.env.PORT, () => {
 // 心跳
 app.get('/heartbeat', async (req, res) => {
   let islogin = false
+  console.log(req.session.user)
   if (req.session.user !== undefined) {
     islogin = true
   }
