@@ -134,7 +134,7 @@ app.get('/file/:name', async (req, res) => {
     res.redirect('http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.name)
   }
 })
-/* ---------------------------------------使用者---------------------------------------------- */
+/* -------------------------------------- 使用者 --------------------------------------------- */
 // 新增
 app.post('/users', async (req, res) => {
   if (!req.headers['content-type'].includes('application/json')) {
@@ -229,7 +229,7 @@ app.delete('/logout', async (req, res) => {
     }
   })
 })
-/* ---------------------------------------關於我們---------------------------------------------- */
+/* -------------------------------------- 關於我們 --------------------------------------------- */
 // 讀取
 app.get('/about', async (req, res) => {
   try {
@@ -329,7 +329,7 @@ app.patch('/update_about/:id', async (req, res) => {
     res.send({ success: false, message: '發生錯誤' })
   }
 })
-/* ---------------------------------------最新消息---------------------------------------------- */
+/* ------------------------------------- 最新消息 --------------------------------------------- */
 // 新增
 app.post('/add_news', async (req, res) => {
   if (!req.headers['content-type'].includes('application/json')) {
@@ -410,7 +410,7 @@ app.delete('/delete_news/:id', async (req, res) => {
     }
   }
 })
-/* ---------------------------------------菜單介紹---------------------------------------------- */
+/* -------------------------------------- 菜單介紹 --------------------------------------------- */
 // 新增
 app.post('/add_menu', async (req, res) => {
   if (!req.headers['content-type'].includes('multipart/form-data')) {
@@ -593,7 +593,7 @@ app.delete('/delete_menu/:id', async (req, res) => {
     }
   }
 })
-/* ---------------------------------------店家位置---------------------------------------------- */
+/* -------------------------------------- 店家位置 --------------------------------------------- */
 // 讀取
 app.get('/location', async (req, res) => {
   try {
@@ -648,7 +648,7 @@ app.post('/new_order', async (req, res) => {
         total: req.body.total
       }
     )
-    console.log('新增快取訂單\n' + result)
+    console.log('新增訂單\n' + result)
     res.status(200)
     res.send({ success: true, message: '送出成功' })
   } catch (error) {
@@ -699,7 +699,7 @@ app.delete('/delete_takeaway/:id', async (req, res) => {
     }
   }
 })
-/* ---------------------------------------聯絡我們---------------------------------------------- */
+/* -------------------------------------- 聯絡我們 --------------------------------------------- */
 // 新增
 app.post('/new_contact', async (req, res) => {
   if (!req.headers['content-type'].includes('application/json')) {
@@ -772,7 +772,7 @@ app.delete('/delete_contact/:id', async (req, res) => {
     }
   }
 })
-/* -----------------------------------------其他---------------------------------------------- */
+/* ---------------------------------------- 其他 --------------------------------------------- */
 // 讀取
 app.get('/other', async (req, res) => {
   try {
@@ -800,8 +800,7 @@ app.patch('/update_other/:id', async (req, res) => {
   }
   try {
     imageName = 'other'
-    upload.array('image', 5)(req, res, async error => {
-      console.log(typeof (req.files.length))
+    upload.array('image', 3)(req, res, async error => {
       if (req.files.length !== 0) {
         if (error instanceof multer.MulterError) {
           // 上傳錯誤
@@ -818,39 +817,73 @@ app.patch('/update_other/:id', async (req, res) => {
           res.send({ success: false, message: '伺服器錯誤' })
         } else {
           try {
-            const pic = ['', '', '', '', '']
-            // 原本圖片字串轉陣列
-            const filenamearr = req.body.filename.split(',')
-            // 找出未更改的圖片
-            for (let i = 0; i < filenamearr.length; i++) {
-              for (const nochange of req.body.image) {
-                if (filenamearr[i] === nochange) {
-                  pic[i] = nochange
+            const body = req.body
+            let send = {}
+            if (req.body.page === 'message') {
+              const notesarr = body.take_away_notes.split('===')
+              send = {
+                take_away_notes: [notesarr[0], notesarr[1], notesarr[2]],
+                open_time: body.open_time,
+                phone: body.phone,
+                fb: body.fb,
+                ig: body.ig
+              }
+            } else {
+              const pic = ['', '', '']
+              // 原本圖片字串轉陣列
+              const filenamearr = req.body.filename.split(',')
+              // 找出未更改的圖片
+              // 若只有一張未改變型態會是字串
+              if (typeof (req.body.image) === 'string') {
+                req.body.image = [req.body.image]
+              }
+              for (let i = 0; i < filenamearr.length; i++) {
+                for (const nochange of req.body.image) {
+                  if (filenamearr[i] === nochange) {
+                    pic[i] = nochange
+                  }
+                }
+              }
+              let index = 0
+              for (let i = 0; i < pic.length; i++) {
+                if (pic[i] === '') {
+                  pic[i] = path.basename(req.files[index].path)
+                  index++
+                }
+              }
+              if (req.body.page === 'carousel') {
+                send = {
+                  carousel: [pic[0], pic[1], pic[2]]
+                }
+              } else {
+                send = {
+                  menubg_img: pic[0],
+                  take_away_img: pic[1],
+                  contactbg_img: pic[2]
                 }
               }
             }
-            let index = 0
-            for (let i = 0; i < pic.length; i++) {
-              if (pic[i] === '') {
-                pic[i] = path.basename(req.files[index].path)
-                index++
+            const result = await db.other.findByIdAndUpdate(req.params.id, send, { new: true })
+            let reply = ''
+            res.status(200)
+            if (req.body.page === 'carousel') {
+              reply = result.carousel
+            } else if (req.body.page === 'background') {
+              reply = {
+                menubg_img: result.menubg_img,
+                take_away_img: result.take_away_img,
+                contactbg_img: result.contactbg_img
+              }
+            } else {
+              reply = {
+                take_away_notes: result.take_away_notes,
+                open_time: result.open_time,
+                phone: result.phone,
+                fb: result.fb,
+                ig: result.ig
               }
             }
-            const body = req.body
-            const notesarr = body.take_away_notes.split('===')
-            const send = {
-              logo_img: pic[0],
-              carousel: [pic[1], pic[2], pic[3]],
-              take_away_img: pic[4],
-              take_away_notes: [notesarr[0], notesarr[1], notesarr[2]],
-              open_time: body.open_time,
-              phone: body.phone,
-              fb: body.fb,
-              ig: body.ig
-            }
-            const result = await db.other.findByIdAndUpdate(req.params.id, send, { new: true })
-            res.status(200)
-            res.send({ success: true, message: '儲存成功', result })
+            res.send({ success: true, message: '儲存成功', result: reply })
           } catch (error) {
             if (error.name === 'ValidationError') {
               // 資料格式錯誤

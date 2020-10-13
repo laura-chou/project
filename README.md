@@ -278,7 +278,7 @@
     "date": "",
     "order_time": "",
     "customer": "",
-    "phone": 0,
+    "phone": "",
     "take_time": "",
     "items": [
         {
@@ -394,9 +394,11 @@
 ---
 ## 其他 
 ### 資料欄位
-- `logo_img` logo 圖片名稱
+- `page` 頁面 (輪播圖、背景圖、文字訊息) 名稱
+- `menubg_img` 菜單介紹背景圖片名稱
 - `carousel` 輪播圖 圖片名稱
 - `take_away_img` 線上預訂背景圖片名稱
+- `contactbg_img` 聯絡我們背景圖片名稱
 - `take_away_notes` 線上預訂注意事項
 - `open_time` 營業時間
 - `phone` 連絡電話
@@ -414,15 +416,34 @@
   }
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
+- 如果 `page` 是 `carousel`
   ```js
   {
     "success": true,
     "message": "",
     "result": {
-        "id": "",
-        "logo_img": "",
         "carousel": ["","",""],
+    }
+  }
+  ```
+- 如果 `page` 是 `background`
+```js
+  {
+    "success": true,
+    "message": "",
+    "result": {
+        "menubg_img": "",
         "take_away_img": "",
+        "contactbg_img": "",
+    }
+  }
+  ```
+- 如果 `page` 是 `message`
+```js
+  {
+    "success": true,
+    "message": "",
+    "result": {
         "take_away_notes": ["","",""],
         "open_time": "",
         "phone": "",
@@ -442,9 +463,10 @@
     "other": [
       {
         "id": "",
-        "logo_img": "",
+        "menubg_img": "",
         "carousel": ["","",""],
         "take_away_img": "",
+        "contactbg_img": "",
         "take_away_notes": ["","",""],
         "open_time": "",
         "phone": "",

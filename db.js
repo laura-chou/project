@@ -92,7 +92,7 @@ const locationSchema = new Schema({
 }, {
   versionKey: false
 })
-// 快取訂單
+// 預定訂單
 const takeawaySchema = new Schema({
   date: {
     type: String
@@ -105,7 +105,7 @@ const takeawaySchema = new Schema({
     required: [true, '姓名必填']
   },
   phone: {
-    type: Number,
+    type: String,
     required: [true, '電話必填']
   },
   take_time: {
@@ -143,17 +143,17 @@ const contactSchema = new Schema({
 })
 // 其他
 const otherSchema = new Schema({
-  logo_img: {
+  menubg_img: {
     type: String
   },
   carousel: [String, String, String],
   take_away_img: {
     type: String
   },
-  take_away_notes: [String, String, String],
-  address: {
+  contactbg_img: {
     type: String
   },
+  take_away_notes: [String, String, String],
   open_time: {
     type: String
   },
