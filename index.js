@@ -16,6 +16,7 @@ dotenv.config()
 const MongoStore = connectMongo(session)
 
 const app = express()
+let phoneLogin = false
 
 app.use(bodyParser.json())
 app.use(cors({
@@ -53,7 +54,6 @@ app.use(session({
     // 1000 毫秒 * 60 * 30 = 三十分鐘
     maxAge: 1000 * 60 * 30
   },
-  user: '',
   // 是否保存未修改的 session
   saveUninitialized: false,
   // 是否每次重設過期時間
@@ -112,25 +112,14 @@ app.listen(process.env.PORT, () => {
 })
 // 心跳
 app.get('/heartbeat', async (req, res) => {
-  // let islogin = false
-  console.log('-------')
-  setTimeout(() => {
-    console.log('1秒')
-    console.log(req.session)
-  }, 1000)
-  setTimeout(() => {
-    console.log('5秒')
-    console.log(req.session)
-  }, 5000)
-  setTimeout(() => {
-    console.log('10秒')
-    console.log(req.session)
-  }, 10000)
-  // if (req.session.user !== undefined) {
-  //   islogin = true
-  // }
+  let islogin = false
+  console.log('--------')
+  console.log(phoneLogin)
+  if (req.session.user !== undefined && phoneLogin) {
+    islogin = true
+  }
   res.status(200)
-  res.send(false)
+  res.send(islogin)
 })
 // 顯示圖片
 app.get('/file/:name', async (req, res) => {
@@ -193,9 +182,13 @@ app.post('/login', async (req, res) => {
     )
     console.log(result[0].account)
     if (result.length > 0) {
-      console.log(req.session)
       req.session.user = result[0].account
       console.log(req.session)
+      console.log(req.session.user)
+      if (req.session.user !== undefined) {
+        phoneLogin = true
+      }
+      console.log(phoneLogin)
       res.status(200)
       res.send({ success: true, message: '' })
     } else {
