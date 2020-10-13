@@ -120,9 +120,6 @@
         min-height: 100%;
       }
     }
-    .filepond--item {
-      height: 250px !important;
-    }
   }
 }
 /* ---------------  裝置斷點控制區 -------------------------*/
@@ -150,11 +147,6 @@
     .footer{
       height: 60%;
       justify-content: space-evenly;
-    }
-    .filepond--wrapper { 
-      .filepond--item {
-        height: 150px !important;
-      }
     }
   }
 }
