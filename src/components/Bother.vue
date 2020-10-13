@@ -26,8 +26,8 @@
         <!-- carousel -->
         <div class="other" v-if="mode === '輪播圖'">
           <div class="row body">
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0"><b-img class="imgstyle" :src=carousel1 v-pswp="carousel1" fluid alt="輪播圖"></b-img></div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0"><b-img class="imgstyle" :src=carousel1 v-pswp="carousel1" fluid alt="輪播圖"></b-img></div>
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img1"
                 ref="pond"
@@ -47,8 +47,8 @@
                 :server="myServer"
               />
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0"><b-img class="imgstyle" :src=carousel2 v-pswp="carousel2" fluid alt="輪播圖"></b-img></div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0"><b-img class="imgstyle" :src=carousel2 v-pswp="carousel2" fluid alt="輪播圖"></b-img></div>
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img2"
                 ref="pond"
@@ -68,10 +68,10 @@
                 :server="myServer"
               />
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <b-img class="imgstyle" :src=carousel3 v-pswp="carousel3" fluid alt="輪播圖"></b-img>
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img3"
                 ref="pond"
@@ -108,11 +108,11 @@
         <!-- background -->
         <div class="other" v-if="mode === '背景圖'">
           <div class="row body">
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <b-img class="imgstyle" :src=menubg v-pswp="menubg" fluid alt="菜單介紹背景圖"></b-img>
               <h2 class="title">菜單介紹</h2>
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img1"
                 ref="pond"
@@ -132,11 +132,11 @@
                 :server="myServer"
               />
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <b-img class="imgstyle" :src=takeawayimg v-pswp="takeawayimg" fluid alt="線上預訂背景圖"></b-img>
               <h2 class="title">線上預訂</h2>
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img2"
                 ref="pond"
@@ -156,11 +156,11 @@
                 :server="myServer"
               />
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <b-img class="imgstyle" :src=contactbg v-pswp="carousel3" fluid alt="聯絡我們背景圖"></b-img>
               <h2 class="title">聯絡我們</h2>
             </div>
-            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+            <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
               <file-pond
                 name="img3"
                 ref="pond"
