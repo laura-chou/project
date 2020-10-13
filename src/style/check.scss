@@ -1,29 +1,115 @@
 #check {
   height: 100vh;
-  font-size: 20px;
-  .container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .content {
+    width: 100%;
     height: 100%;
-    padding: 2%;
-    h2 {
-      margin: 8px 0 23px 0;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h2 {
+    width: 100%;
+    height: 100px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: #c0b536;
+  }
+  .ck {
+    width: 94%;
+    margin: 2% 0 2% 0;
+    height: 96%;
+    position: absolute;
+    padding: 0 3% 0 3%;
+    font-size: 18px;
+  }
+  /*----------- table ------------*/
+  .table thead th {
+    border-bottom: 2px solid #758629;
+  }
+  .table th, .table td {
+    border-top: 1px solid #758629;
+  }
+  .table {
+    margin-bottom: 0;
+  }
+  #check-table{
+    height: 60%;
+    margin-top: 1%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    border-bottom: 1px solid #758629;
+    th {
+      &:nth-child(1) {
+        width: 50%;
+      }
+      &:nth-child(2) {
+        width: 25%;
+      }
+      &:nth-child(3) {
+        width: 25%;
+      }
+    }
+    td {
+      vertical-align:middle;
     }
   }
-  .total,
   .info {
+    height: 15%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .total {
+    height: 10%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
+    margin-top: 2%;
+    padding-right: 10%;
     div {
-      margin-bottom: 1%;
+      margin-bottom: .5%;
     }
   }
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    button {
-      margin-right: 3%;
+  .btn {
+    height: 12%;
+    width: 100%;
+    display: grid;
+  }
+}
+/* ---------------  裝置斷點控制區 -------------------------*/
+/* 350px 以上 576px 以下 */
+@media (min-width: 350px) and (max-width: 576px) {
+  #check {
+    #check-table{
+      margin-top: 3%;
+    }
+    .total {
+      height: 13%;
+    }
+  }
+}
+/* 350px 以下 */
+@media (max-width: 350px) {
+  #check {
+    #check-table{
+      height: 55%;
+      margin-top: 10%;
+    }
+    .total {
+      height: 13%;
     }
   }
 }

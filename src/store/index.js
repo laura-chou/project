@@ -7,8 +7,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: '',
-    // navbar
-    logo: '',
     // 輪播圖
     carousel: [],
     // 關於我們 (id、圖片、介紹)
@@ -17,7 +15,8 @@ export default new Vuex.Store({
     aboutIntro: '',
     // 最新消息
     news: [],
-    // 菜單介紹(菜單、數量)
+    // 菜單介紹(背景圖片、菜單、數量)
+    menuBg: '',
     menu: [],
     counts: [],
     // 店家位置 (id、地址、公車資訊、捷運資訊)
@@ -28,29 +27,27 @@ export default new Vuex.Store({
     // 預定訂單 (圖片、注意事項、訂單)
     takeawayImg: '',
     takeawayNotes: [],
-    // 快取訂單(訂購人、電話、時間、項目、數量)
+    // 線上預訂(訂購人、電話、時間、項目)
     orderCustomer: '',
     orderPhone: '',
     orderTime: '',
     orderItems: [],
-    orderCount: [],
     // 接收訂單(開關、呼叫api)
     open: false,
     catch: false,
+    // 聯絡我們 (背景圖)
+    contactBg: '',
     // footer
     openTime: '',
     phone: '',
     fb: '',
     ig: '',
-    otherId: ''
+    otherId: '',
+    checkUser: false
   },
   getters: {
     user (state) {
       return state.user
-    },
-    // navbar
-    logo (state) {
-      return state.logo
     },
     // 輪播圖
     carousel (state) {
@@ -71,6 +68,9 @@ export default new Vuex.Store({
       return state.news
     },
     // 菜單介紹
+    menu_bg (state) {
+      return state.menuBg
+    },
     menu (state) {
       return state.menu
     },
@@ -90,7 +90,7 @@ export default new Vuex.Store({
     location_metro (state) {
       return state.locationMetro
     },
-    // 快取訂單(訂購人、電話、時間、項目、數量)
+    // 線上預訂(訂購人、電話、時間、項目)
     order_customer (state) {
       return state.orderCustomer
     },
@@ -102,9 +102,6 @@ export default new Vuex.Store({
     },
     order_items (state) {
       return state.orderItems
-    },
-    order_count (state) {
-      return state.orderCount
     },
     // 預定訂單 (圖片、注意事項)
     takeaway_img (state) {
@@ -119,6 +116,10 @@ export default new Vuex.Store({
     },
     catch (state) {
       return state.catch
+    },
+    // 聯絡我們 (背景圖)
+    contact_bg (state) {
+      return state.contactBg
     },
     // footer
     open_time (state) {
@@ -135,6 +136,9 @@ export default new Vuex.Store({
     },
     other_id (state) {
       return state.otherId
+    },
+    check_user (state) {
+      return state.checkUser
     }
   },
   mutations: {
@@ -143,10 +147,6 @@ export default new Vuex.Store({
     },
     logout (state) {
       state.user = ''
-    },
-    // navbar
-    logo (state, data) {
-      state.logo = data
     },
     // 輪播圖
     carousel (state, data) {
@@ -167,6 +167,9 @@ export default new Vuex.Store({
       state.news = data
     },
     // 菜單介紹
+    menuBg (state, data) {
+      state.menuBg = data
+    },
     menu (state, data) {
       state.menu = data
     },
@@ -193,7 +196,7 @@ export default new Vuex.Store({
     takeawayNotes (state, data) {
       state.takeawayNotes = data
     },
-    // 快取訂單(訂購人、電話、時間、項目、數量)
+    // 線上預訂(訂購人、電話、時間、項目)
     orderCustomer (state, data) {
       state.orderCustomer = data
     },
@@ -206,15 +209,16 @@ export default new Vuex.Store({
     orderItems (state, data) {
       state.orderItems = data
     },
-    orderCount (state, data) {
-      state.orderCount = data
-    },
     // 接收訂單(開關、呼叫api)
     open (state, data) {
       state.open = data
     },
     catch (state, data) {
       state.catch = data
+    },
+    // 聯絡我們 (背景圖)
+    contactBg (state, data) {
+      state.contactBg = data
     },
     // footer
     openTime (state, data) {
@@ -231,6 +235,9 @@ export default new Vuex.Store({
     },
     otherId (state, data) {
       state.otherId = data
+    },
+    checkUser (state, data) {
+      state.checkUser = data
     }
   },
   actions: {

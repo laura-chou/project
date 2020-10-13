@@ -27,7 +27,7 @@
     cursor: pointer;
   }
   h1 {
-    font-size: 100px;
+    font-size: 70px;
     font-weight: bolder;
     color: #fff;
   }

@@ -1,7 +1,16 @@
 <template>
   <div id="babout">
-    <div class="container">
-      <h1>關於我們</h1>
+    <h2>關於我們</h2>
+    <div class="content">
+      <vue-css-doodle>
+        :doodle {
+          @grid: 7 / 100vmax;
+        }
+        @size: 1px calc(141.4% + 1px);
+        transform: rotate(@p(±45deg));
+        background: #AEACFB;
+        margin: auto;
+      </vue-css-doodle>
       <b-form @submit="submit" class="form">
         <div class="img">
           <b-img :src=getimg v-pswp="getimg" fluid alt="關於我們"></b-img>
@@ -25,7 +34,7 @@
           />
         </div>
         <div class="intro">
-          <h5>店家介紹</h5>
+          <h4>店家介紹</h4>
           <textarea name="textarea"  v-model="message"></textarea>
         </div>
         <div class="button">

@@ -1,52 +1,30 @@
 #location {
   height: 100vh;
   background: #F1F1E4;
-  border-bottom: 1px solid gray;
-  .container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
   .row {
-    height: 30%;
+    height: 15%;
     width: 100%;
-    h2{
-      width: 100%;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    margin: 0;
+    z-index: 99;
     img {
       width: 10%;
       margin-right: 3%;
     }
     .col-12 {
       font-size: 18px;
+      font-weight: 600;
       display: flex;
       align-items: center;
+      justify-content: center;
+      background: rgba($color: #fff, $alpha: 1.0);
     }
   }
   .map {
     width: 100%;
-    height: 78%;
-    padding: 0 0 2% 0;
+    height: 85%;
     .embed-responsive {
       width: 100%;
       height: 100%;
-    }
-  }
-}
-/* 裝置斷點控制區 --------------------------*/
-@media (min-width: 576px){
-  #location {
-    .map {
-      height: 80% !important;
-    }
-    .row {
-      height: 20% !important;
     }
   }
 }

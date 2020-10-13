@@ -1,10 +1,9 @@
 <template>
   <div id="menu">
-    <div class="container">
+    <vue-parallax class="parallax" type="fixed" :src="meunbg">
       <div class="swiper3d">
-        <h2>菜單介紹</h2>
-        <div class="example-3d wow pulse
-">
+        <h2>菜單</h2>
+        <div class="example-3d wow fadeInRight">
           <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="m in menu" :key="m.name">
               <Photoswipe>
@@ -24,7 +23,7 @@
           </swiper>
         </div>
       </div>
-    </div>
+    </vue-parallax>
   </div>
 </template>
 <script>
@@ -38,6 +37,10 @@ export default {
     swiperSlide
   },
   computed: {
+    meunbg () {
+      const img = process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.menu_bg
+      return img
+    },
     menu () {
       return this.$store.getters.menu
     }

@@ -1,18 +1,20 @@
 <template>
   <div id="takeaway">
+    <div class="bg" :style="img"></div>
     <div class="container">
-      <div class="flex wow bounceIn" :style="img">
-        <div class="rule">
-          <h2>線上預定</h2>
-          <b-img src="./img/warn.png"></b-img>
-          <ol>
-            <li>{{ notes[0] }}</li>
-            <li>{{ notes[1] }}</li>
-            <li>{{ notes[2] }}</li>
-          </ol>
-          <b-button variant="danger" @click="order">我要預訂</b-button>
+      <h2>線上預定</h2>
+      <div class="list wow flash" style="width:100%">
+        <div class="row">
+          <div><b-img src="./img/warn.png"></b-img>{{ notes[0] }}</div>
+        </div>
+        <div class="row">
+          <div><b-img src="./img/warn.png"></b-img>{{ notes[1] }}</div>
+        </div>
+        <div class="row">
+          <div><b-img src="./img/warn.png"></b-img>{{ notes[2] }}</div>
         </div>
       </div>
+      <b-button variant="custom" @click="order">我要預訂</b-button>
     </div>
   </div>
 </template>

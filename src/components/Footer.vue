@@ -2,7 +2,7 @@
   <div id="footer">
     <div class="row">
       <div class="col-8 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-0 logo">
-          <a href="#" v-scroll-to="{ el: '#navbar', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" ><b-img :src="logo" fluid alt="艸頭黃"></b-img></a>
+          <a href="#" v-scroll-to="{ el: '#navbar', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" ><b-img src="./img/logo.png" fluid alt="艸頭黃"></b-img></a>
       </div>
       <div class="col-2 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0 social">
           <a class="fb" :href="fb" target="_blank"><b-img src="./img/facebook.png"></b-img></a>
@@ -36,10 +36,6 @@
 export default {
   name: 'Footer',
   computed: {
-    logo () {
-      const img = process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.logo
-      return img
-    },
     address () {
       return this.$store.getters.location_address
     },

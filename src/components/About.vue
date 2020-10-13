@@ -1,10 +1,9 @@
 <template>
   <div id="about">
+    <div class="bg" :style="aboutimg"></div>
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 pr-4 wow bounceInLeft pic"><b-img :src=aboutimg v-pswp="aboutimg" fluid alt="關於我們"></b-img></div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-0 wow bounceInRight" style="text-align:left;"><h2>關於我們</h2><p>{{ aboutintro }}</p></div>
-      </div>
+      <h2>關於我們</h2>
+      <div class="p-0 wow bounceInRight"><p>{{ aboutintro }}</p></div>
     </div>
   </div>
 </template>
@@ -13,9 +12,14 @@
 import WOW from 'wow.js'
 export default {
   name: 'About',
+  data () {
+    return {
+      transitions: ['book']
+    }
+  },
   computed: {
     aboutimg () {
-      const img = process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.about_img
+      const img = 'background-image:url("' + process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.about_img + '")'
       return img
     },
     aboutintro () {

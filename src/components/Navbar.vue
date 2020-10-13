@@ -2,7 +2,7 @@
   <div id="navbar" class="fixed-top">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <div class="logo">
-          <a href="#" v-scroll-to="{ el: '#navbar', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" ><b-img :src="logo" fluid alt="艸頭黃"></b-img></a>
+          <a href="#" v-scroll-to="{ el: '#navbar', easing: [0.34, 1.56, 0.64, 1], duration: 1000 }" ><b-img src="./img/logo.png" fluid alt="艸頭黃"></b-img></a>
       </div>
       <b-navbar-toggle id="navbar-toggle" target="nav-collapse" @click="navbartoggle"></b-navbar-toggle>
       <b-collapse id="nav-collapse" class="justify-content-end" is-nav>
@@ -24,21 +24,17 @@
 export default {
   data () {
     return {
-      toggle: true
-    }
-  },
-  computed: {
-    logo () {
-      const img = process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.logo
-      return img
+      toggle: true,
+      check: this.$store.getters.check_user
     }
   },
   mounted () {
     this.axios.get(process.env.VUE_APP_APIURL + '/other')
       .then(response => {
-        this.$store.commit('logo', response.data.other[0].logo_img)
+        this.$store.commit('menuBg', response.data.other[0].menubg_img)
         this.$store.commit('carousel', response.data.other[0].carousel)
         this.$store.commit('takeawayImg', response.data.other[0].take_away_img)
+        this.$store.commit('contactBg', response.data.other[0].contactbg_img)
         this.$store.commit('takeawayNotes', response.data.other[0].take_away_notes)
         this.$store.commit('openTime', response.data.other[0].open_time)
         this.$store.commit('phone', response.data.other[0].phone)
@@ -91,17 +87,19 @@ export default {
           imageWidth: 120,
           imageHeight: 120,
           allowOutsideClick: false,
-          html: '<div class="input"><img src="./img/user.png"></img><input id="swal-input1" type="text" class="swal2-input" placeholder="帳號"></div>' +
-                '<div class="input"><img src="./img/password.png"></img><input id="swal-input2" type="password" class="swal2-input" placeholder="密碼"></div>',
+          html: '<div class="input"><img src="./img/user.png"></img><input id="account" type="text" class="swal2-input" placeholder="帳號"></div>' +
+                '<div class="input"><img src="./img/password.png"></img><input id="password" type="password" class="swal2-input" placeholder="密碼"></div>',
           focusConfirm: false,
           showCancelButton: true,
           confirmButtonText: '登入',
           cancelButtonText: '取消',
           preConfirm: () => {
-            return [
-              document.getElementById('swal-input1').value,
-              document.getElementById('swal-input2').value
-            ]
+            const account = this.$swal.getPopup().querySelector('#account').value
+            const password = this.$swal.getPopup().querySelector('#password').value
+            if (!account || !password) {
+              this.$swal.showValidationMessage('請輸入帳號或密碼')
+            }
+            return [account, password]
           }
         }).then((result) => {
           const navbaricon = document.getElementsByClassName('navbar-toggler-icon')
@@ -124,6 +122,7 @@ export default {
                     }).then((result) => {
                       this.$router.push('backstage')
                       this.$store.commit('login', account)
+                      this.$store.commit('checkUser', true)
                     })
                   })()
                 } else {
@@ -155,6 +154,26 @@ export default {
           this.toggle = true
         })
       })()
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (to.path === '/backstage' && !this.$store.getters.check_user) {
+        (async () => {
+          await this.$swal.fire({
+            icon: 'error',
+            title: '未登入',
+            allowOutsideClick: false,
+            confirmButtonText: '確定'
+          }).then((result) => {
+            // 如果現在不是在首頁，跳到登出後的首頁
+            if (this.$route.path !== '/') {
+              this.$router.push('/')
+              clearInterval(this.islogin)
+            }
+          })
+        })()
+      }
     }
   }
 }

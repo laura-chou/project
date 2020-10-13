@@ -1,34 +1,55 @@
 <template>
   <div id="check">
-    <div class="container">
-      <h2>確認訂單</h2>
-    <div>
-      <b-table :fields="fields" :items="items"></b-table>
-    </div>
-    <hr>
-    <div class="total">
-      <div>
-        <h5>共<span> {{ amount }} </span>個</h5>
-      </div>
-      <div>
-        <h5 class="m-0">總金額<span> {{ money }} </span>元</h5>
-      </div>
-    </div>
-    <hr>
-    <div class="info">
-      <div>
-        <h5>訂購人: <span>{{ customer }}</span></h5>
-      </div>
-      <div>
-        <h5>聯絡電話: <span>{{ phone }}</span></h5>
-      </div>
-      <div>
-        <h5>快取時間: <span>{{ time }}</span></h5>
-      </div>
-    </div>
-    <div class="button">
-        <b-button variant="danger" @click="previous">上一步</b-button>
-        <b-button variant="danger" @click="send">確定</b-button>
+    <h2>確認訂單</h2>
+    <div class="content">
+      <vue-css-doodle>
+        :doodle {
+          @grid: 6 / 130vmax;
+        }
+        opacity: 0.5;
+        transition: .2s @r(.6s);
+        clip-path: polygon(
+          @rand(100%) 0, 100% @rand(100%), 0 @rand(100%)
+        );
+        will-change: transform;
+        transform: scale(@r(.2, .8)) rotate(@calc(360+30*@index)deg);
+
+        background: hsla(
+          calc(240 - 6 * @row * @col),
+          70%, 68%, @r.8
+        );
+      </vue-css-doodle>
+      <div class="ck">
+        <div class="info">
+          <h5><span style="visibility: hidden">空</span>訂購人：<span>{{ customer }}</span></h5>
+          <h5>聯絡電話：<span>{{ phone }}</span></h5>
+          <h5>取單時間：<span>{{ time }}</span></h5>
+        </div>
+        <div id="check-table">
+          <b-table :fields="fields" :items="items"></b-table>
+        </div>
+        <div class="total">
+          <div>
+            <h5>共<span> {{ amount }} </span>個</h5>
+          </div>
+          <div>
+            <h5 class="m-0">總金額<span> {{ money }} </span>元</h5>
+          </div>
+        </div>
+        <div class="btn">
+          <div class="row">
+            <div class="col d-flex align-items-center justify-content-center">
+              <div class="button">
+                <b-button variant="danger" @click="previous">上一步</b-button>
+              </div>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+              <div class="button">
+                <b-button variant="danger" @click="send">確定</b-button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -140,7 +161,14 @@ export default {
             })()
           } else {
             // 不是就顯示回來的 message
-            alert(data.message)
+            (async () => {
+              await this.$swal.fire({
+                icon: 'error',
+                title: data.message,
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
           }
         })
         .catch(error => {

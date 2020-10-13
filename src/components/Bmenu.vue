@@ -1,25 +1,33 @@
 <template>
   <div id="bmenu">
-    <div class="container">
-      <h1>菜單介紹</h1>
+    <h2>菜單</h2>
+    <div class="content">
+      <vue-css-doodle>
+        :doodle {
+          @grid: 7 / 100vmax;
+        }
+        @size: 1px calc(141.4% + 1px);
+        transform: rotate(@p(±45deg));
+        background: #AEACFB;
+        margin: auto;
+      </vue-css-doodle>
       <div class="menu">
-        <b-table id="my-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+        <b-table id="menu-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
           <template v-slot:cell(delete)="data">
             <div @click="del(data)" style="color:red">
               <font-awesome-icon class="icon-size" :icon="['fas','trash-alt']"></font-awesome-icon>
             </div>
           </template>
-          <template v-slot:cell(image)="data">
-            <div class="imgdiv"><b-img :src="data.value" v-pswp="data.value"></b-img></div>
-          </template>
           <template v-slot:cell(name)="data">
-            <span>{{ data.value }}</span>
-          </template>
-          <template v-slot:cell(notes))="data">
             <span>{{ data.value }}</span>
           </template>
           <template v-slot:cell(price))="data">
             <span>${{ data.value }}</span>
+          </template>
+          <template v-slot:cell(info)="data">
+            <div @click="info(data.item.name)" style="color:blue">
+              <font-awesome-icon class="icon-size" :icon="['fas','clipboard-list']"></font-awesome-icon>
+            </div>
           </template>
           <template v-slot:cell(edit)="data">
             <div @click="edit(data)" style="color:green">
@@ -27,19 +35,20 @@
             </div>
           </template>
         </b-table>
+        <div class="button">
+          <b-button id="btn" variant="danger" @click="addmodal = !addmodal">新增</b-button>
+        </div>
         <b-pagination
           v-model="currentPage"
           pills :total-rows="rows"
           :per-page="perPage"
           align="fill"
-          aria-controls="my-table"
+          aria-controls="menu-table"
         ></b-pagination>
-        <div class="button">
-          <b-button id="btn" variant="danger" @click="addmodal = !addmodal">新增</b-button>
-        </div>
       </div>
       <div>
-        <b-modal v-model="addmodal"
+        <b-modal
+        v-model="addmodal"
         no-fade
         no-close-on-backdrop
         centered>
@@ -78,6 +87,11 @@
             <div class="col-2 p-0 d-flex align-items-center justify-content-center">價格：</div>
             <div class="col-10"><input id="add-price" v-model="addprice" type="number" min=1 class="swal2-input"></div>
           </div>
+          <div class="row warn">
+            <div class="swal2-validation-message" id="swal2-validation-message" style="display: flex; margin-left: -20px; margin-right: -20px;">
+              <span>{{ warn }}</span>
+            </div>
+          </div>
           <div class="row">
             <div class="col-6 d-flex justify-content-end"><b-button variant="danger" @click="send('add')">確定</b-button></div>
             <div class="col-6 d-flex justify-content-start"><b-button variant="danger" @click="cancel('add')">取消</b-button></div>
@@ -85,7 +99,8 @@
         </b-modal>
       </div>
       <div>
-        <b-modal v-model="editmodal"
+        <b-modal
+        v-model="editmodal"
         no-fade
         no-close-on-backdrop
         centered>
@@ -124,6 +139,11 @@
             <div class="col-2 p-0 d-flex align-items-center justify-content-center">價格：</div>
             <div class="col-10"><input id="add-price" v-model="editprice" type="number" min=1 class="swal2-input"></div>
           </div>
+          <div class="row warn">
+            <div class="swal2-validation-message" id="swal2-validation-message" style="display: flex; margin-left: -20px; margin-right: -20px;">
+              <span>{{ warn }}</span>
+            </div>
+          </div>
           <div class="row">
             <div class="col-6 d-flex justify-content-end"><b-button variant="danger" @click="send('edit')">確定</b-button></div>
             <div class="col-6 d-flex justify-content-start"><b-button variant="danger" @click="cancel('edit')">取消</b-button></div>
@@ -144,20 +164,16 @@ export default {
           label: '刪除'
         },
         {
-          key: 'image',
-          label: '圖片：'
-        },
-        {
           key: 'name',
           label: '名稱'
         },
         {
-          key: 'notes',
-          label: '附註'
-        },
-        {
           key: 'price',
           label: '價格'
+        },
+        {
+          key: 'info',
+          label: '詳細資訊'
         },
         {
           key: 'edit',
@@ -178,6 +194,7 @@ export default {
       editnotes: '',
       editprice: 0,
       editindex: 0,
+      warn: '',
       myServer: {
         process: (fieldName, file, metadata, load) => {
           const btn = document.getElementById('btn')
@@ -200,44 +217,33 @@ export default {
   methods: {
     send (mode) {
       const filepondassistant = document.getElementsByClassName('filepond--assistant')
+      const showwarn = document.getElementsByClassName('warn')
       const fd = new FormData()
       if (mode === 'add') {
         if (filepondassistant[0].innerHTML.includes('檔案太大')) {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '檔案太大',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '檔案太大'
+          return
         } else if (filepondassistant[0].innerHTML === '') {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '未選擇檔案',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '未選擇檔案'
+          return
         } else if (this.addname === '' || this.addnotes === '') {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '欄位未填寫',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '名稱或附註未填寫'
+          return
         } else if (this.addprice === 0) {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '價格不可以為0',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '價格不可以為 0'
+          return
         } else {
           if (filepondassistant[0].innerHTML.includes('上傳完成')) {
           // FormData 可以同時傳送檔案和表單資料
@@ -282,14 +288,23 @@ export default {
         this.cancel('add')
       } else {
         if (filepondassistant[0].innerHTML.includes('檔案太大')) {
-          (async () => {
-            await this.$swal.fire({
-              icon: 'error',
-              title: '檔案太大',
-              allowOutsideClick: false,
-              confirmButtonText: '確定'
-            })
-          })()
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '檔案太大'
+          return
+        } else if (this.editname === '' || this.editnotes === '') {
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '名稱或附註未填寫'
+          return
+        } else if (this.editprice === 0 || this.editprice === '0') {
+          if (!showwarn[0].hasAttribute('style', 'display: block')) {
+            showwarn[0].setAttribute('style', 'display: block')
+          }
+          this.warn = '價格不可以為 0'
+          return
         } else {
           if (filepondassistant[0].innerHTML.includes('上傳完成')) {
           // FormData 可以同時傳送檔案和表單資料
@@ -313,7 +328,7 @@ export default {
                   this.items[this.editindex].name = response.data.result.name
                   this.items[this.editindex].notes = response.data.result.notes
                   this.items[this.editindex].price = response.data.result.price
-                  this.$store.commit('news', this.items)
+                  this.$store.commit('menu', this.items)
                 })
               })()
             })
@@ -364,7 +379,7 @@ export default {
             this.axios.delete(process.env.VUE_APP_APIURL + '/delete_menu/' + id)
               .then(response => {
                 this.items.splice(index, 1)
-                this.$store.commit('news', this.items)
+                this.$store.commit('menu', this.items)
               })
               .catch(error => {
                 (async () => {
@@ -377,6 +392,40 @@ export default {
                 })()
               })
           }
+        })
+      })()
+    },
+    info (data) {
+      (async () => {
+        console.log(data)
+        let index = 0
+        for (let i = 0; i < this.items.length; i++) {
+          if (this.items[i].name === data) {
+            index = i
+          }
+        }
+        const image = this.items[index].image
+        const name = this.items[index].name
+        const notes = this.items[index].notes
+        const price = this.items[index].price
+        await this.$swal.fire({
+          title: name,
+          imageUrl: image,
+          imageWidth: 400,
+          imageHeight: 300,
+          html: `
+                <hr>
+                <div class="row">
+                  <div class="col-3" style="text-align:center;"><h5>附註</h5></div>
+                  <div class="col-9" style="text-align:left;">${notes}</div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-3" style="text-align:center;"><h5>價格</h5></div>
+                  <div class="col-9" style="text-align:left;">${price}</div>
+                </div>`,
+          allowOutsideClick: false,
+          confirmButtonText: '確定'
         })
       })()
     },

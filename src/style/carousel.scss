@@ -2,6 +2,9 @@
 #carousel {
   height: 100vh;
   position: relative;
+  .vue-flux {
+    height: 100%;
+  }
   .textra{
     position: absolute;
     top: 50%;

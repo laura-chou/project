@@ -1,9 +1,18 @@
 <template>
   <div id="bnews">
-    <div class="container">
-      <h1>最新消息</h1>
+    <h2>最新消息</h2>
+    <div class="content">
+      <vue-css-doodle>
+        :doodle {
+          @grid: 7 / 100vmax;
+        }
+        @size: 1px calc(141.4% + 1px);
+        transform: rotate(@p(±45deg));
+        background: #AEACFB;
+        margin: auto;
+      </vue-css-doodle>
       <div class="new">
-        <b-table id="menu-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+        <b-table id="news-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
           <template v-slot:cell(delete)="data">
             <font-awesome-icon class="icon-size" @click="del(data)" style="color:red" :icon="['fas','trash-alt']"></font-awesome-icon>
           </template>
@@ -16,16 +25,16 @@
             </div>
           </template>
         </b-table>
+        <div class="button">
+          <b-button id="btn" variant="danger" @click="add">新增</b-button>
+        </div>
         <b-pagination
           v-model="currentPage"
           pills :total-rows="rows"
           :per-page="perPage"
           align="fill"
-          aria-controls="menu-table"
+          aria-controls="news-table"
         ></b-pagination>
-        <div class="button">
-          <b-button id="btn" variant="danger" @click="add">新增</b-button>
-        </div>
       </div>
     </div>
   </div>
@@ -49,15 +58,12 @@ export default {
           label: '編輯'
         }
       ],
-      perPage: 10,
+      perPage: 8,
       currentPage: 1,
       items: this.$store.getters.news
     }
   },
   computed: {
-    getnews () {
-      return this.$store.getters.news
-    },
     rows () {
       return this.items.length
     },
@@ -96,56 +102,47 @@ export default {
           confirmButtonText: '新增',
           cancelButtonText: '取消',
           preConfirm: () => {
-            return [
-              document.getElementById('add-date').value,
-              document.getElementById('add-title').value,
-              document.getElementById('add-content').value,
-              document.getElementById('add-url').value
-            ]
+            const d = this.$swal.getPopup().querySelector('#add-date').value
+            const t = this.$swal.getPopup().querySelector('#add-title').value
+            const c = this.$swal.getPopup().querySelector('#add-content').value
+            const u = this.$swal.getPopup().querySelector('#add-url').value
+            if (!t || !c) {
+              this.$swal.showValidationMessage('標題或內容未填寫')
+            }
+            return [d, t, c, u]
           }
         }).then((result) => {
           if (result.isConfirmed) {
-            if (result.value[1] === '' || result.value[2] === '') {
-              (async () => {
-                await this.$swal.fire({
-                  icon: 'error',
-                  title: '標題或內容未填寫',
-                  allowOutsideClick: false,
-                  confirmButtonText: '確定'
-                })
-              })()
-            } else {
-              const send = {
-                date: result.value[0],
-                title: result.value[1],
-                content: result.value[2],
-                url: result.value[3]
-              }
-              this.axios.post(process.env.VUE_APP_APIURL + '/add_news/', send)
-                .then(response => {
-                  (async () => {
-                    await this.$swal.fire({
-                      icon: 'success',
-                      title: response.data.message,
-                      allowOutsideClick: false,
-                      confirmButtonText: '確定'
-                    }).then((result) => {
-                      this.items.unshift(response.data.result)
-                      this.$store.commit('news', this.items)
-                    })
-                  })()
-                })
-                .catch(error => {
-                  (async () => {
-                    await this.$swal.fire({
-                      icon: 'error',
-                      title: error.response.data.message,
-                      allowOutsideClick: false,
-                      confirmButtonText: '確定'
-                    })
-                  })()
-                })
+            const send = {
+              date: result.value[0],
+              title: result.value[1],
+              content: result.value[2],
+              url: result.value[3]
             }
+            this.axios.post(process.env.VUE_APP_APIURL + '/add_news/', send)
+              .then(response => {
+                (async () => {
+                  await this.$swal.fire({
+                    icon: 'success',
+                    title: response.data.message,
+                    allowOutsideClick: false,
+                    confirmButtonText: '確定'
+                  }).then((result) => {
+                    this.items.unshift(response.data.result)
+                    this.$store.commit('news', this.items)
+                  })
+                })()
+              })
+              .catch(error => {
+                (async () => {
+                  await this.$swal.fire({
+                    icon: 'error',
+                    title: error.response.data.message,
+                    allowOutsideClick: false,
+                    confirmButtonText: '確定'
+                  })
+                })()
+              })
           }
         })
       })()
@@ -180,6 +177,7 @@ export default {
                     icon: 'error',
                     title: error.response.data.message,
                     allowOutsideClick: false,
+                    showCancelButton: false,
                     confirmButtonText: '確定'
                   })
                 })()
@@ -225,12 +223,14 @@ export default {
           confirmButtonText: '儲存',
           cancelButtonText: '取消',
           preConfirm: () => {
-            return [
-              document.getElementById('edit-date').value,
-              document.getElementById('edit-title').value,
-              document.getElementById('edit-content').value,
-              document.getElementById('edit-url').value
-            ]
+            const d = this.$swal.getPopup().querySelector('#edit-date').value
+            const t = this.$swal.getPopup().querySelector('#edit-title').value
+            const c = this.$swal.getPopup().querySelector('#edit-content').value
+            const u = this.$swal.getPopup().querySelector('#edit-url').value
+            if (!t || !c) {
+              this.$swal.showValidationMessage('標題或內容未填寫')
+            }
+            return [d, t, c, u]
           }
         }).then((result) => {
           if (result.isConfirmed) {

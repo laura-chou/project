@@ -1,11 +1,20 @@
 <template>
     <div id="blocation">
-      <div class="container">
-        <h1>店家位置</h1>
+      <h2>店家位置</h2>
+      <div class="content">
+        <vue-css-doodle>
+          :doodle {
+            @grid: 7 / 100vmax;
+          }
+          @size: 1px calc(141.4% + 1px);
+          transform: rotate(@p(±45deg));
+          background: #AEACFB;
+          margin: auto;
+        </vue-css-doodle>
         <div class="locat">
           <b-row class="my-1">
             <b-col sm="3" md="2" lg="2" xl="2">
-              <label>地址:</label>
+              <label>地址</label>
             </b-col>
             <b-col sm="9" md="10" lg="10" xl="10">
               <b-form-input id="address" v-model="address" :state=addressState :value=address></b-form-input>
@@ -13,7 +22,7 @@
           </b-row>
           <b-row class="my-1">
             <b-col sm="3" md="2" lg="2" xl="2">
-              <label>公車資訊:</label>
+              <label>公車資訊</label>
             </b-col>
             <b-col sm="9" md="10" lg="10" xl="10">
               <b-form-input id="bus" v-model="bus" :state=busState :value=bus></b-form-input>
@@ -21,7 +30,7 @@
           </b-row>
           <b-row class="my-1">
             <b-col sm="3" md="2" lg="2" xl="2">
-              <label>捷運資訊:</label>
+              <label>捷運資訊</label>
             </b-col>
             <b-col sm="9" md="10" lg="10" xl="10">
               <b-form-input id="metro" v-model="metro" :state=metroState :value=metro></b-form-input>

@@ -1,21 +1,32 @@
 <template>
   <div id="news">
-    <div class="container">
-      <div class="content">
-        <h2>最新消息</h2>
-        <b-table id="my-table" class="wow fadeInUp" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
-          <template v-slot:cell(title)="data">
-            <a href="javascript:void(0)" @click="detail(data.value)">{{ data.value }}</a>
-          </template>
-        </b-table>
-        <b-pagination
-          v-model="currentPage"
-          pills :total-rows="rows"
-          :per-page="perPage"
-          align="fill"
-          aria-controls="my-table"
-        ></b-pagination>
-      </div>
+    <vue-css-doodle>
+      :doodle {
+        @grid: 7 / 100vmax;
+      }
+      @shape: rhombus;
+      opacity: 0.2;
+      background: hsla(
+        calc(360 - @i * 4), 70%, 68%, @r.8
+      );
+      transform:
+        scale(@r(.2, 1.5))
+        translate(@m2.@r(±50%));
+    </vue-css-doodle>
+    <div class="content">
+      <h2>最新消息</h2>
+      <b-table id="my-table" class="wow fadeInUp" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+        <template v-slot:cell(title)="data">
+          <a href="javascript:void(0)" @click="detail(data.value)">{{ data.value }}</a>
+        </template>
+      </b-table>
+      <b-pagination
+        v-model="currentPage"
+        pills :total-rows="rows"
+        :per-page="perPage"
+        align="fill"
+        aria-controls="my-table"
+      ></b-pagination>
     </div>
   </div>
 </template>

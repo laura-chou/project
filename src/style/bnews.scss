@@ -1,35 +1,89 @@
 #bnews {
   height: 100vh;
-  .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .content {
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  h1 {
-    height: 15%;
+  h2 {
+    width: 100%;
+    height: 100px;
+    font-weight: 600;
+    color: #fff;
+    position: absolute;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
+    background: #c0b536;
   }
   .new {
-    height: 85%;
+    width: 94%;
+    margin: 2% 0 2% 0;
+    height: 96%;
+    position: absolute;
+    top: 0;
+    padding: 0 3% 0 3%;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
   }
+  /*----------- table -------------*/
+  .table thead th {
+    border-bottom: 2px solid #758629;
+  }
+  .table th, .table td {
+    border-top: 1px solid #758629;
+  }
+  #news-table{
+    height: 80%;
+    text-align:center;
+    th {
+      &:nth-child(1) {
+        width: 20%;
+      }
+      &:nth-child(2) {
+        width: 60%;
+      }
+      &:nth-child(3) {
+        width: 20%;
+      }
+    }
+    tbody tr {
+      &:hover {
+        background: rgba($color: #C0C103, $alpha: 0.6);
+      }
+    }
+    td {
+      vertical-align:middle;
+    }
+  }
+  /*----------- button -------------*/
+  .button {
+    height: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /*----------- paginatio -------------*/
   .pagination {
+    margin-bottom: 2%;
     width: 100%;
   }
   .page-item.active .page-link {
     background-color: #CCCC41;
     border-color: #C0C103;
-  }
-}
-#add-content,
-#edit-content {
-  height: 100px;
-}
-#menu-table{
-  height: 50%;
-  text-align:center;
-  td {
-    vertical-align:middle;
   }
 }

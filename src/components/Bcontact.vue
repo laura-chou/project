@@ -1,9 +1,18 @@
 <template>
     <div id="bcontact">
-      <div class="container">
-        <h1>聯絡我們</h1>
+      <h2>訪客留言</h2>
+      <div class="content">
+        <vue-css-doodle>
+          :doodle {
+            @grid: 7 / 100vmax;
+          }
+          @size: 1px calc(141.4% + 1px);
+          transform: rotate(@p(±45deg));
+          background: #AEACFB;
+          margin: auto;
+        </vue-css-doodle>
         <div class="cont">
-          <b-table id="my-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+          <b-table id="contact-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
             <template v-slot:cell(delete)="data">
               <div @click="del(data)" style="color:red">
                 <font-awesome-icon class="icon-size" :icon="['fas','trash-alt']"></font-awesome-icon>
@@ -16,7 +25,7 @@
               <span>{{ data.value }}</span>
             </template>
             <template v-slot:cell(detail)="data">
-              <div @click="detail(data)" style="color:green">
+              <div @click="detail(data)" style="color:blue">
                 <font-awesome-icon class="icon-size" :icon="['fas','clipboard-list']"></font-awesome-icon>
               </div>
             </template>
@@ -26,7 +35,7 @@
             pills :total-rows="rows"
             :per-page="perPage"
             align="fill"
-            aria-controls="my-table"
+            aria-controls="contact-table"
           ></b-pagination>
         </div>
       </div>
@@ -55,7 +64,7 @@ export default {
           label: '詳細資訊'
         }
       ],
-      perPage: 5,
+      perPage: 6,
       currentPage: 1,
       items: []
     }
@@ -80,10 +89,16 @@ export default {
           cancelButtonText: '取消'
         }).then((result) => {
           if (result.isConfirmed) {
-            const id = this.items[data.index]._id
+            let index = 0
+            for (let i = 0; i < this.items.length; i++) {
+              if (this.items[i]._id === data.item._id) {
+                index = i
+              }
+            }
+            const id = this.items[index]._id
             this.axios.delete(process.env.VUE_APP_APIURL + '/delete_contact/' + id)
               .then(response => {
-                this.items.splice(data.index, 1)
+                this.items.splice(index, 1)
               })
               .catch(error => {
                 (async () => {
@@ -101,13 +116,19 @@ export default {
     },
     detail (data) {
       (async () => {
-        const name = this.items[data.index].name
-        const email = this.items[data.index].email
-        const message = this.items[data.index].message.replace(/\n/g, '<br>')
+        let index = 0
+        for (let i = 0; i < this.items.length; i++) {
+          if (this.items[i]._id === data.item._id) {
+            index = i
+          }
+        }
+        const name = this.items[index].name
+        const email = this.items[index].email
+        const message = this.items[index].message.replace(/\n/g, '<br>')
         await this.$swal.fire({
           html: `<div class="row">
-                  <div class="col-3">${name}</div>
-                  <div class="col-9">${email}</div>
+                  <div class="col-4">${name}</div>
+                  <div class="col-8">${email}</div>
                 </div>
                 <hr>
                 <div class="row" style="text-align:left">

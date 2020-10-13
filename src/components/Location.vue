@@ -1,25 +1,22 @@
 <template>
   <div id="location">
-    <div class="container">
-      <div class="row">
-        <h2>店家位置</h2>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 wow slideInLeft">
-          <b-img src="./img/bus.png" fluid></b-img>
-          <span>{{ locationbus }}</span>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 wow slideInRight">
-          <b-img src="./img/metro.png" fluid></b-img>
-          <span>{{ locationmetro }}</span>
-        </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 wow slideInLeft">
+        <b-img src="./img/bus.png" fluid></b-img>
+        <span>{{ locationbus }}</span>
       </div>
-      <div class="map wow slideInUp">
-        <b-embed
-          type="iframe"
-          aspect="16by9"
-          :src="locationaddress"
-          allowfullscreen
-        ></b-embed>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 wow slideInRight">
+        <b-img src="./img/metro.png" fluid></b-img>
+        <span>{{ locationmetro }}</span>
       </div>
+    </div>
+    <div class="map wow slideInUp">
+      <b-embed
+        type="iframe"
+        aspect="16by9"
+        :src="locationaddress"
+        allowfullscreen
+      ></b-embed>
     </div>
   </div>
 </template>

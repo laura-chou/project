@@ -20,6 +20,7 @@ import footerStyle from './style/footer.scss'
 import orderStyle from './style/order.scss'
 import checkStyle from './style/check.scss'
 import burgermenuStyle from './style/burgermenu.scss'
+import backstageStyle from './style/backstage.scss'
 import baboutStyle from './style/babout.scss'
 import btakeawayStyle from './style/btakeaway.scss'
 import botherStyle from './style/bother.scss'
@@ -44,7 +45,9 @@ import './style/filepond.min.css'
 import 'wowjs/css/libs/animate.css'
 import Textra from 'vue-textra'
 import VueScrollTo from 'vue-scrollto'
-
+import { FluxParallax, VueFlux, FluxControls, FluxPreloader, FluxPagination, FluxCaption } from 'vue-flux'
+import VueCssDoodle from '@luxdamore/vue-css-doodle'
+import '@luxdamore/vue-css-doodle/dist/VueCssDoodle.css'
 // axios 預設傳送認證資訊
 axios.defaults.withCredentials = true
 Vue.use(VueAxios, axios)
@@ -55,6 +58,7 @@ Vue.use(VueSweetalert2)
 Vue.use(Slide)
 Vue.use(Textra)
 Vue.use(VueScrollTo)
+Vue.use(VueCssDoodle)
 Vue.config.productionTip = false
 library.add(faPlus, faMinus, faTimes, faTrashAlt, faEdit, faClipboardList)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -66,6 +70,12 @@ const FilePond = vueFilePond(
   FilePondPluginFileValidateSize
 )
 Vue.component('file-pond', FilePond)
+Vue.component('vue-parallax', FluxParallax)
+Vue.component('vue-flux', VueFlux)
+Vue.component('flux-caption', FluxCaption)
+Vue.component('flux-controls', FluxControls)
+Vue.component('flux-preloader', FluxPreloader)
+Vue.component('flux-pagination', FluxPagination)
 new Vue({
   router,
   store,
@@ -81,6 +91,7 @@ new Vue({
   orderStyle,
   checkStyle,
   burgermenuStyle,
+  backstageStyle,
   baboutStyle,
   btakeawayStyle,
   botherStyle,

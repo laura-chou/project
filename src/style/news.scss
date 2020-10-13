@@ -1,30 +1,49 @@
 #news {
   height: 100vh;
-  background: #F1F1E4;
-  border-bottom: 1px solid gray;
-  .container {
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  .content {
+    width: 80%;
+    height: 90%;
+    margin: 0;
+    padding: 2% 10% 2% 10%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .content {
-    width: 100%;
+    flex-direction: column;
+    position: absolute;
     h2 {
       font-weight: 600;
-      margin-bottom: 15px;
+      height: 10%;
+      width: 100%;
+      margin: 0;
     }
   }
+  /*----------- table ------------*/
+  .table thead th {
+    border-bottom: 2px solid #758629;
+  }
+  .table th, .table td {
+    border-top: 1px solid #758629;
+  }
   #my-table {
-    height: 500px;
-    margin-bottom: 0;
+    height: 85%;
+    margin-bottom: 5%;
     td {
       vertical-align: middle;
       width: 50%;
     }
   }
+  /*----------- pagination ------------*/
   .pagination {
     width: 100%;
+    margin: 0;
+  }
+  .page-link:focus{
+    box-shadow: none;
   }
   .page-item.active .page-link {
     background-color: #CCCC41;
@@ -35,7 +54,16 @@
 .sweetalert{
   text-align: left;
 }
-/* 裝置斷點控制區 --------------------------*/
+/* ---------------  裝置斷點控制區 -------------------------*/
+/* sm 576px 以下 */
+@media (max-width: 576px) {
+  #news {
+    .content {
+      width: 96%;
+      padding: 2%;
+    }
+  }
+}
 /* lg 992px 以上 */
 @media (min-width: 992px) {
   #news {

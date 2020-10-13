@@ -1,43 +1,54 @@
 <template>
   <div id="btakeaway">
-    <div class="container">
-      <h1>預定訂單</h1>
-      <div class="open">
-        <div><h4>接單開關：</h4></div>
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch" @click="change"></span>
-            </label>
+    <h2>預定訂單</h2>
+    <div class="content">
+      <vue-css-doodle>
+        :doodle {
+          @grid: 7 / 100vmax;
+        }
+        @size: 1px calc(141.4% + 1px);
+        transform: rotate(@p(±45deg));
+        background: #AEACFB;
+        margin: auto;
+      </vue-css-doodle>
+      <div class="bta">
+        <div class="open">
+          <div><h4>接單開關：</h4></div>
+          <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
+              <label class="onoffswitch-label" for="myonoffswitch">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch" @click="change"></span>
+              </label>
+          </div>
         </div>
-      </div>
-      <div class="overflow-auto">
-        <b-table id="my-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
-          <template v-slot:cell(delete)="data">
-            <div @click="del(data)" style="color:red">
-              <font-awesome-icon class="icon-size" :icon="['fas','trash-alt']"></font-awesome-icon>
-            </div>
-          </template>
-          <template v-slot:cell(customer)="data">
-            <span>{{ data.value }}</span>
-          </template>
-          <template v-slot:cell(take_time)="data">
-            <span>{{ data.value }}</span>
-          </template>
-          <template v-slot:cell(detail)="data">
-            <div @click="detail(data)" style="color:green">
-              <font-awesome-icon class="icon-size" :icon="['fas','clipboard-list']"></font-awesome-icon>
-            </div>
-          </template>
-        </b-table>
-        <b-pagination
-          v-model="currentPage"
-          pills :total-rows="rows"
-          :per-page="perPage"
-          align="fill"
-          aria-controls="my-table"
-        ></b-pagination>
+        <div class="takeaway">
+          <b-table id="takeaway-table" :fields="fields" :items="items" :per-page="perPage" :current-page="currentPage" Default>
+            <template v-slot:cell(delete)="data">
+              <div @click="del(data)" style="color:red">
+                <font-awesome-icon class="icon-size" :icon="['fas','trash-alt']"></font-awesome-icon>
+              </div>
+            </template>
+            <template v-slot:cell(customer)="data">
+              <span>{{ data.value }}</span>
+            </template>
+            <template v-slot:cell(take_time)="data">
+              <span>{{ data.value }}</span>
+            </template>
+            <template v-slot:cell(detail)="data">
+              <div @click="detail(data)" style="color:blue">
+                <font-awesome-icon class="icon-size" :icon="['fas','clipboard-list']"></font-awesome-icon>
+              </div>
+            </template>
+          </b-table>
+          <b-pagination
+            v-model="currentPage"
+            pills :total-rows="rows"
+            :per-page="perPage"
+            align="fill"
+            aria-controls="takeaway-table"
+          ></b-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -58,14 +69,14 @@ export default {
         },
         {
           key: 'take_time',
-          label: '快取時間'
+          label: '取單時間'
         },
         {
           key: 'detail',
           label: '訂單資訊'
         }
       ],
-      perPage: 5,
+      perPage: 6,
       currentPage: 1,
       items: []
     }
@@ -90,6 +101,9 @@ export default {
     }
   },
   methods: {
+    sortItem (x, y) {
+      return ((x.date === y.date) ? 0 : ((x.date > y.date) ? 1 : -1))
+    },
     del (data) {
       (async () => {
         await this.$swal.fire({
@@ -101,10 +115,16 @@ export default {
           cancelButtonText: '取消'
         }).then((result) => {
           if (result.isConfirmed) {
-            const id = this.items[data.index]._id
+            let index = 0
+            for (let i = 0; i < this.items.length; i++) {
+              if (this.items[i]._id === data.item._id) {
+                index = i
+              }
+            }
+            const id = this.items[index]._id
             this.axios.delete(process.env.VUE_APP_APIURL + '/delete_takeaway/' + id)
               .then(response => {
-                this.items.splice(data.index, 1)
+                this.items.splice(index, 1)
               })
               .catch(error => {
                 (async () => {
@@ -122,13 +142,21 @@ export default {
     },
     detail (data) {
       (async () => {
-        const customer = this.items[data.index].customer
-        const date = this.items[data.index].date
-        const order = this.items[data.index].items
-        const orderTime = this.items[data.index].order_time
-        const phone = this.items[data.index].phone
-        const takeTime = this.items[data.index].take_time
-        const totalMoney = this.items[data.index].total
+        console.log(this.items)
+        console.log(data.item)
+        let index = 0
+        for (let i = 0; i < this.items.length; i++) {
+          if (this.items[i]._id === data.item._id) {
+            index = i
+          }
+        }
+        const customer = this.items[index].customer
+        const date = this.items[index].date
+        const order = this.items[index].items
+        const orderTime = this.items[index].order_time
+        const phone = this.items[index].phone
+        const takeTime = this.items[index].take_time
+        const totalMoney = this.items[index].total
         let totalCount = 0
         let table = ''
         for (const i of order) {
@@ -156,7 +184,7 @@ export default {
                       <td scope="col">聯絡電話：${phone}</td>
                     </tr>
                     <tr>
-                      <td scope="col">快取時間：${takeTime}</td>
+                      <td scope="col">取單時間：${takeTime}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -173,7 +201,7 @@ export default {
                   </tbody>
                 </table>
                 <table style="display: flex; justify-content: flex-end">
-                  <tbody style="text-align: right">
+                  <tbody style="text-align: right; margin-right: 5%">
                     <tr>
                       <td scope="col">共 ${totalCount} 個</td>
                     </tr>
@@ -196,6 +224,8 @@ export default {
               filter.push(i)
             }
           }
+          filter.sort(this.sortItem)
+          filter.reverse()
           this.items = filter
         })
         .catch(error => {

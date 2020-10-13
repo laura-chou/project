@@ -1,61 +1,95 @@
 #takeaway {
   height: 100vh;
-  background: #F1F1E4;
-  border-bottom: 1px solid gray;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .bg {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    filter: brightness(40%);
+  }
   .container {
     height: 100%;
+    width: 100%;
+    padding: 0 5% 0 5%;
+    position: absolute;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    h2 {
+      font-weight: bold;
+      height: 10%;
+      color: #fff;
+    }
   }
-  .flex {
-    width: 100%;
-    height: 80%;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    border-radius: 5%;
-    box-shadow: 1px 3px 10px black;
+  .btn-custom {
+    color: #fff;
+    border-color: #c0b536;
+    background-color: #c0b536;
+    font-size: 20px;
+    font-weight: 600;
   }
-  .rule {
+  .list {
+    height: 50%;
     width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 0.9;
-    border-radius: 5%;
-    font-size: 18px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     flex-direction: column;
-    padding: 0 10% 0 10%;
-    h2{
-      font-weight: 600;
+    margin-bottom: 5%;
+  }
+  .row {
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
     }
     img {
-      width: 12%;
-    }
-    ol {
-      padding: 0;
-      margin: 0;
-      text-align: left;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-direction: column;
-      li {
-        margin: 0 0 5% 0;
-      }
-    }
-    button {
-      font-weight: bold;
+      width: 7%;
+      margin-right: 10px;
     }
   }
 }
 /* 裝置斷點控制區 --------------------------*/
-@media (min-width: 992px){
+/* 裝置斷點控制區 --------------------------*/
+// sm 576px 以下
+@media (max-width: 576px) {
+  #takeaway {
+    .container {
+      padding: 0 10% 0 10%;
+    }
+    .row {
+      div {
+        font-size: 18px;
+      }
+      img {
+        width: 10%;
+      }
+    }
+  }
+}
+// 992px 以上
+@media (min-width: 992px) {
   #takeaway {
     .container {
       padding: 0 15% 0 15%;
+    }
+    .row {
+      img {
+        width: 6%;
+      }
     }
   }
 }

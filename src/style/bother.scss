@@ -1,24 +1,112 @@
 #bother {
   height: 100vh;
-  .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .content {
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  h1 {
-    height: 15vh;
+  h2 {
+    width: 100%;
+    height: 100px;
+    font-weight: 600;
+    color: #fff;
+    position: absolute;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
+    background: #c0b536;
   }
-  .row {
-    height: 300px;
+  /*-------- home ----------*/
+  .change_page {
+    width: 100%;
+    height: 33.3%;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 500;
+    &:hover {
+      background: rgba($color: #c0b536, $alpha: 0.5);
+      font-weight: bolder;
+    }
   }
+  /*-------- carousel ----------*/
+  .other {
+    width: 94%;
+    margin: 2% 0 2% 0;
+    height: 96%;
+    padding: 0 3% 0 3%;
+    position: absolute;
+  }
+  .body,
+  .body1 {
+    height: 90%;
+  }
+  .imgstyle {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .title {
+    width: 99%;
+    position: absolute;
+    color: #fff;
+    font-weight: 600;
+    background: rgba($color: #000000, $alpha: 0.5)
+  }
+  .col-sm-3, .col-md-3, .col-lg-3, .col-xl-3{
+    padding-bottom: 1% !important;
+    height: 50%;
+    &:nth-child(odd) {
+      padding-left: 1% !important;
+    }
+  }
+  /*-------- message ----------*/
   .inputrow {
+    width: 100%;
+    span {
+      margin-bottom: 2%;
+    }
+    input {
+      margin-bottom: 2%;
+    }
+  }
+  h4 {
+    width: 100%;
     height: 50px;
     display: flex;
-    align-content: center;
     justify-content: center;
+    align-items: center;
+    background: #c0b536;
+    color: #fff;
   }
+  .notice,
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .notice{
+    height: 45%;
+  }
+  .footer {
+    height: 55%;
+  }
+  /*-------- filepond ----------*/
   .filepond--wrapper {
     width: 100%;
     height: 100%;
@@ -32,17 +120,41 @@
         min-height: 100%;
       }
     }
+    .filepond--item {
+      height: 250px !important;
+    }
   }
-  .flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2% 0 2% 0;
-    position: relative;
-    .imgstyle {
-      position: absolute;
-      width: 100%;
-      height: 100%;
+}
+/* ---------------  裝置斷點控制區 -------------------------*/
+/* 576px 以下 */
+@media (max-width: 576px) {
+  #bother {
+    .content {
+      overflow: auto;
+    }
+    .body {
+      padding: 0 10% 0 10%;
+      height: 150%;
+      .col-12{
+        height: 16.5%;
+        &:nth-child(2),
+        &:nth-child(4) {
+          margin-bottom: 3%;
+        }
+      }
+    }
+    .button {
+      margin-top: 5%;
+    }
+    .notice,
+    .footer{
+      height: 60%;
+      justify-content: space-evenly;
+    }
+    .filepond--wrapper { 
+      .filepond--item {
+        height: 150px !important;
+      }
     }
   }
 }
