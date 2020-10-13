@@ -53,6 +53,7 @@ app.use(session({
     // 1000 毫秒 * 60 * 30 = 三十分鐘
     maxAge: 1000 * 60 * 30
   },
+  user: '',
   // 是否保存未修改的 session
   saveUninitialized: false,
   // 是否每次重設過期時間
@@ -117,9 +118,6 @@ app.get('/heartbeat', async (req, res) => {
   if (req.session.user !== undefined) {
     islogin = true
   }
-  setInterval(() => {
-    console.log(req.session)
-  }, 1000)
   res.status(200)
   res.send(islogin)
 })
@@ -184,6 +182,7 @@ app.post('/login', async (req, res) => {
     )
     console.log(result[0].account)
     if (result.length > 0) {
+      console.log(req.session)
       req.session.user = result[0].account
       console.log(req.session)
       res.status(200)
