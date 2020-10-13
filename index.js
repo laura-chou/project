@@ -112,7 +112,7 @@ app.listen(process.env.PORT, () => {
 // 心跳
 app.get('/heartbeat', async (req, res) => {
   let islogin = false
-  console.log(req.session.user)
+  console.log(req.session)
   if (req.session.user !== undefined) {
     islogin = true
   }
@@ -162,23 +162,6 @@ app.post('/users', async (req, res) => {
       res.status(500)
       res.send({ success: false, message: '伺服器錯誤' })
     }
-  }
-})
-// 確認是否為使用者
-app.get('/check_user', async (req, res) => {
-  try {
-    if (req.session.user === undefined) {
-      res.status(401)
-      res.send({ success: false, message: '未登入' })
-      return
-    } else {
-      res.status(200)
-      res.send({ success: true, message: '確定為使用者' })
-    }
-  } catch (error) {
-    // 找不到東西
-    res.status(404)
-    res.send({ success: false, message: '找不到' })
   }
 })
 // 登入
