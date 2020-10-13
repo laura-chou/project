@@ -117,8 +117,8 @@ app.get('/heartbeat', async (req, res) => {
   if (req.session.user !== undefined) {
     islogin = true
   }
-  setTimeout(() => {
-    console.log('++++++' + req.session)
+  setInterval(() => {
+    console.log(req.session)
   }, 1000)
   res.status(200)
   res.send(islogin)
