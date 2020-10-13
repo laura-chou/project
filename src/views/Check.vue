@@ -156,6 +156,7 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
+                this.$store.commit('isOrder', true)
                 this.$router.push('/')
               })
             })()

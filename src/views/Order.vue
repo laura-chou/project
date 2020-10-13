@@ -162,6 +162,9 @@ export default {
     },
     rows () {
       return this.items.length
+    },
+    isorder () {
+      return this.$store.getters.is_order
     }
   },
   methods: {
@@ -221,13 +224,14 @@ export default {
       })()
     },
     cancel () {
+      for (const i of this.items) {
+        if (i.quantity > 0) {
+          i.quantity = 0
+        }
+      }
       this.name = ''
       this.phone = ''
       this.selected = null
-      this.$store.commit('orderCustomer', '')
-      this.$store.commit('orderPhone', '')
-      this.$store.commit('orderTime', null)
-      this.$store.commit('orderItems', [])
       this.$router.push('/')
     },
     next () {
@@ -289,15 +293,21 @@ export default {
       }
     }
   },
-  created () {
-    if (this.customer !== '') {
-      this.name = this.customer
-    }
-    if (this.tele !== '') {
-      this.phone = this.tele
-    }
-    if (this.time !== '') {
-      this.selected = this.time
+  watch: {
+    $route (to, from) {
+      if (to.name === 'Order' && from.name === 'Home') {
+        if (this.isorder) {
+          for (const i of this.items) {
+            if (i.quantity > 0) {
+              i.quantity = 0
+            }
+          }
+          this.name = ''
+          this.phone = ''
+          this.selected = null
+          this.$store.commit('isOrder', false)
+        }
+      }
     }
   }
 }

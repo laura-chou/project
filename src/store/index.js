@@ -27,11 +27,12 @@ export default new Vuex.Store({
     // 預定訂單 (圖片、注意事項、訂單)
     takeawayImg: '',
     takeawayNotes: [],
-    // 線上預訂(訂購人、電話、時間、項目)
+    // 線上預訂(訂購人、電話、時間、項目、是否送出訂單)
     orderCustomer: '',
     orderPhone: '',
     orderTime: '',
     orderItems: [],
+    isOrder: false,
     // 接收訂單(開關、呼叫api)
     open: false,
     catch: false,
@@ -90,7 +91,7 @@ export default new Vuex.Store({
     location_metro (state) {
       return state.locationMetro
     },
-    // 線上預訂(訂購人、電話、時間、項目)
+    // 線上預訂(訂購人、電話、時間、項目、是否送出訂單)
     order_customer (state) {
       return state.orderCustomer
     },
@@ -102,6 +103,9 @@ export default new Vuex.Store({
     },
     order_items (state) {
       return state.orderItems
+    },
+    is_order (state) {
+      return state.isOrder
     },
     // 預定訂單 (圖片、注意事項)
     takeaway_img (state) {
@@ -196,7 +200,7 @@ export default new Vuex.Store({
     takeawayNotes (state, data) {
       state.takeawayNotes = data
     },
-    // 線上預訂(訂購人、電話、時間、項目)
+    // 線上預訂(訂購人、電話、時間、項目、是否送出訂單)
     orderCustomer (state, data) {
       state.orderCustomer = data
     },
@@ -208,6 +212,9 @@ export default new Vuex.Store({
     },
     orderItems (state, data) {
       state.orderItems = data
+    },
+    isOrder (state, data) {
+      state.isOrder = data
     },
     // 接收訂單(開關、呼叫api)
     open (state, data) {
