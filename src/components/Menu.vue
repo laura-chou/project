@@ -28,7 +28,7 @@
 </template>
 <script>
 import WOW from 'wow.js'
-import 'swiper/swiper-bundle.css'
+import '@/style/swiper-bundle.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'Menu',
