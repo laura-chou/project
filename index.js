@@ -112,14 +112,25 @@ app.listen(process.env.PORT, () => {
 })
 // 心跳
 app.get('/heartbeat', async (req, res) => {
-  let islogin = false
+  // let islogin = false
   console.log('-------')
-  console.log(req.session)
-  if (req.session.user !== undefined) {
-    islogin = true
-  }
+  setTimeout(() => {
+    console.log('1秒')
+    console.log(req.session)
+  }, 1000)
+  setTimeout(() => {
+    console.log('5秒')
+    console.log(req.session)
+  }, 5000)
+  setTimeout(() => {
+    console.log('10秒')
+    console.log(req.session)
+  }, 10000)
+  // if (req.session.user !== undefined) {
+  //   islogin = true
+  // }
   res.status(200)
-  res.send(islogin)
+  res.send(false)
 })
 // 顯示圖片
 app.get('/file/:name', async (req, res) => {
