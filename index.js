@@ -16,7 +16,6 @@ dotenv.config()
 const MongoStore = connectMongo(session)
 
 const app = express()
-let phoneLogin = false
 
 app.use(bodyParser.json())
 app.use(cors({
@@ -63,6 +62,7 @@ app.use(session({
 
 let storage
 let imageName = ''
+let phoneLogin = false
 if (process.env.FTP === 'false') {
   // 開發環境將上傳檔案放本機
   storage = multer.diskStorage({
@@ -208,9 +208,11 @@ app.delete('/logout', async (req, res) => {
   req.session.destroy(error => {
     if (error) {
       res.status(500)
+      phoneLogin = false
       res.send({ success: false, message: '伺服器錯誤' })
     } else {
       res.clearCookie()
+      phoneLogin = false
       res.status(200)
       res.send({ success: true, message: '' })
     }
