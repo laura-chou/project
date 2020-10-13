@@ -113,9 +113,7 @@ app.listen(process.env.PORT, () => {
 // 心跳
 app.get('/heartbeat', async (req, res) => {
   let islogin = false
-  console.log('--------')
-  console.log(phoneLogin)
-  if (req.session.user !== undefined && phoneLogin) {
+  if (req.session.user !== undefined || phoneLogin) {
     islogin = true
   }
   res.status(200)
@@ -180,15 +178,11 @@ app.post('/login', async (req, res) => {
         password: md5(req.body.password)
       }
     )
-    console.log(result[0].account)
     if (result.length > 0) {
       req.session.user = result[0].account
-      console.log(req.session)
-      console.log(req.session.user)
       if (req.session.user !== undefined) {
         phoneLogin = true
       }
-      console.log(phoneLogin)
       res.status(200)
       res.send({ success: true, message: '' })
     } else {
