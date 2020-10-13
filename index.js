@@ -178,8 +178,11 @@ app.post('/login', async (req, res) => {
       }
     )
     console.log(result)
+    console.log(result.length)
+    console.log(result[0].account)
     if (result.length > 0) {
       req.session.user = result[0].account
+      console.log(req.session)
       res.status(200)
       res.send({ success: true, message: '' })
     } else {
