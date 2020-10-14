@@ -197,13 +197,10 @@ export default {
       warn: '',
       myServer: {
         process: (fieldName, file, metadata, load) => {
-          const btn = document.getElementById('btn')
-          btn.disabled = true
           this.file = file
           this.isUpload = true
           setTimeout(() => {
             load(Date.now())
-            btn.disabled = false
           }, 1500)
         }
       }
@@ -218,6 +215,7 @@ export default {
     send (mode) {
       const filepondassistant = document.getElementsByClassName('filepond--assistant')
       const showwarn = document.getElementsByClassName('warn')
+      const btn = document.getElementById('btn')
       const fd = new FormData()
       if (mode === 'add') {
         if (filepondassistant[0].innerHTML.includes('檔案太大')) {
@@ -245,6 +243,7 @@ export default {
           this.warn = '價格不可以為 0'
           return
         } else {
+          btn.disabled = true
           if (filepondassistant[0].innerHTML.includes('上傳完成')) {
           // FormData 可以同時傳送檔案和表單資料
             fd.append('image', this.file)
@@ -269,6 +268,7 @@ export default {
                 confirmButtonText: '確定'
               }).then((result) => {
                 this.isUpload = false
+                btn.disabled = false
                 response.data.result.image = process.env.VUE_APP_APIURL + '/file/' + response.data.result.image
                 this.items.unshift(response.data.result)
                 this.$store.commit('menu', this.items)
@@ -397,7 +397,6 @@ export default {
     },
     info (data) {
       (async () => {
-        console.log(data)
         let index = 0
         for (let i = 0; i < this.items.length; i++) {
           if (this.items[i].name === data) {

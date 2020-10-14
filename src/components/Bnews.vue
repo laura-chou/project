@@ -113,6 +113,8 @@ export default {
           }
         }).then((result) => {
           if (result.isConfirmed) {
+            const btn = document.getElementById('btn')
+            btn.disabled = true
             const send = {
               date: result.value[0],
               title: result.value[1],
@@ -128,6 +130,7 @@ export default {
                     allowOutsideClick: false,
                     confirmButtonText: '確定'
                   }).then((result) => {
+                    btn.disabled = false
                     this.items.unshift(response.data.result)
                     this.$store.commit('news', this.items)
                   })

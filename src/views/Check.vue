@@ -45,7 +45,7 @@
             </div>
             <div class="col d-flex align-items-center justify-content-center">
               <div class="button">
-                <b-button variant="danger" @click="send">確定</b-button>
+                <b-button id="btn" variant="danger" @click="send">確定</b-button>
               </div>
             </div>
           </div>
@@ -125,6 +125,9 @@ export default {
     },
     send () {
       const itm = []
+      // 防止重複點擊
+      const btn = document.getElementById('btn')
+      btn.disabled = true
       for (const i of this.items) {
         itm.push(
           {
@@ -134,8 +137,7 @@ export default {
           }
         )
       }
-      this.axios.post(
-        process.env.VUE_APP_APIURL + '/new_order',
+      this.axios.post(process.env.VUE_APP_APIURL + '/new_order',
         {
           date: this.getTodayDate,
           order_time: this.getTodayTime,
@@ -156,6 +158,7 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
+                btn.disabled = false
                 this.$store.commit('isOrder', true)
                 this.$router.push('/')
               })

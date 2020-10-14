@@ -89,6 +89,9 @@ export default {
           })
         })()
       } else {
+        // 防止重複點擊
+        const btn = document.getElementById('btn')
+        btn.disabled = true
         if (filepondassistant[0].innerHTML.includes('上傳完成')) {
           // FormData 可以同時傳送檔案和表單資料
           fd.append('image', this.file)
@@ -104,6 +107,7 @@ export default {
                 confirmButtonText: '確定'
               }).then((result) => {
                 this.isUpload = false
+                btn.disabled = false
                 if (response.data.result.image !== undefined) {
                   this.$store.commit('aboutImg', response.data.result.image)
                 }

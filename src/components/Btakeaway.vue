@@ -142,8 +142,6 @@ export default {
     },
     detail (data) {
       (async () => {
-        console.log(this.items)
-        console.log(data.item)
         let index = 0
         for (let i = 0; i < this.items.length; i++) {
           if (this.items[i]._id === data.item._id) {

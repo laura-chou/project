@@ -82,6 +82,9 @@ export default {
           })
         })()
       } else {
+        // 防止重複點擊
+        const btn = document.getElementById('btn')
+        btn.disabled = true
         const send = {
           address: address,
           bus: bus,
@@ -96,6 +99,7 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
+                btn.disabled = false
                 this.$store.commit('locationAddress', address)
                 this.$store.commit('locationBus', bus)
                 this.$store.commit('locationMetro', metro)

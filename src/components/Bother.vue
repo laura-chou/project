@@ -368,6 +368,7 @@ export default {
   },
   methods: {
     submit (page) {
+      const btn = document.getElementsByClassName('btn')
       const filepondassistant = document.getElementsByClassName('filepond--assistant')
       let toobig = false
       const fd = new FormData()
@@ -388,6 +389,9 @@ export default {
         }
       }
       if (page === 'carousel' && !toobig) {
+        for (const b of btn) {
+          b.disabled = true
+        }
         const filename = [this.nowcarousel1, this.nowcarousel2, this.nowcarousel3]
         for (let i = 0; i < filepondassistant.length; i++) {
           if (filepondassistant[i].innerHTML.includes('上傳完成')) {
@@ -407,7 +411,11 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
-                this.$store.commit('carousel', response.data.result)
+                for (const b of btn) {
+                  b.disabled = false
+                }
+                console.log(response.data.result)
+                this.$store.commit('carousel', response.data.result.carousel)
               })
             })()
           }).catch(error => {
@@ -431,6 +439,9 @@ export default {
         }
         fd.append('filename', filename)
         fd.append('page', page)
+        for (const b of btn) {
+          b.disabled = true
+        }
         this.axios.patch(process.env.VUE_APP_APIURL + '/update_other/' + this.getid, fd)
           .then(response => {
             (async () => {
@@ -440,6 +451,9 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
+                for (const b of btn) {
+                  b.disabled = false
+                }
                 this.$store.commit('menuBg', response.data.result.menubg_img)
                 this.$store.commit('takeawayImg', response.data.result.take_away_img)
                 this.$store.commit('contactBg', response.data.result.contactbg_img)
@@ -465,40 +479,47 @@ export default {
               confirmButtonText: '確定'
             })
           })()
+        } else {
+          for (const b of btn) {
+            b.disabled = true
+          }
+          const notes = this.note1 + '===' + this.note2 + '===' + this.note3
+          fd.append('page', page)
+          fd.append('take_away_notes', notes)
+          fd.append('open_time', this.opentime)
+          fd.append('phone', this.phone)
+          fd.append('fb', this.fburl)
+          fd.append('ig', this.igurl)
+          this.axios.patch(process.env.VUE_APP_APIURL + '/update_other/' + this.getid, fd)
+            .then(response => {
+              (async () => {
+                await this.$swal.fire({
+                  icon: 'success',
+                  title: response.data.message,
+                  allowOutsideClick: false,
+                  confirmButtonText: '確定'
+                }).then((result) => {
+                  for (const b of btn) {
+                    b.disabled = false
+                  }
+                  this.$store.commit('takeawayNotes', response.data.result.take_away_notes)
+                  this.$store.commit('openTime', response.data.result.open_time)
+                  this.$store.commit('phone', response.data.result.phone)
+                  this.$store.commit('fb', response.data.result.fb)
+                  this.$store.commit('ig', response.data.result.ig)
+                })
+              })()
+            }).catch(error => {
+              (async () => {
+                await this.$swal.fire({
+                  icon: 'error',
+                  title: error.response.data.message,
+                  allowOutsideClick: false,
+                  confirmButtonText: '確定'
+                })
+              })()
+            })
         }
-        const notes = this.note1 + '===' + this.note2 + '===' + this.note3
-        fd.append('page', page)
-        fd.append('take_away_notes', notes)
-        fd.append('open_time', this.opentime)
-        fd.append('phone', this.phone)
-        fd.append('fb', this.fburl)
-        fd.append('ig', this.igurl)
-        this.axios.patch(process.env.VUE_APP_APIURL + '/update_other/' + this.getid, fd)
-          .then(response => {
-            (async () => {
-              await this.$swal.fire({
-                icon: 'success',
-                title: response.data.message,
-                allowOutsideClick: false,
-                confirmButtonText: '確定'
-              }).then((result) => {
-                this.$store.commit('takeawayNotes', response.data.result.take_away_notes)
-                this.$store.commit('openTime', response.data.result.open_time)
-                this.$store.commit('phone', response.data.result.phone)
-                this.$store.commit('fb', response.data.result.fb)
-                this.$store.commit('ig', response.data.result.ig)
-              })
-            })()
-          }).catch(error => {
-            (async () => {
-              await this.$swal.fire({
-                icon: 'error',
-                title: error.response.data.message,
-                allowOutsideClick: false,
-                confirmButtonText: '確定'
-              })
-            })()
-          })
       }
     },
     change_page (page) {
