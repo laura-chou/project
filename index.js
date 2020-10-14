@@ -890,17 +890,30 @@ app.patch('/update_other/:id', async (req, res) => {
       } else {
         try {
           const body = req.body
-          const notesarr = body.take_away_notes.split('===')
-          const send = {
-            take_away_notes: [notesarr[0], notesarr[1], notesarr[2]],
-            open_time: body.open_time,
-            phone: body.phone,
-            fb: body.fb,
-            ig: body.ig
+          let send = ''
+          if (body.page === 'carousel') {
+            send = {
+              carousel: body.image
+            }
+          } else if (body.page === 'background') {
+            send = {
+              menubg_img: body.image[0],
+              take_away_img: body.image[1],
+              contactbg_img: body.image[2]
+            }
+          } else if (body.page === 'message') {
+            const notesarr = body.take_away_notes.split('===')
+            send = {
+              take_away_notes: [notesarr[0], notesarr[1], notesarr[2]],
+              open_time: body.open_time,
+              phone: body.phone,
+              fb: body.fb,
+              ig: body.ig
+            }
           }
-          const result = await db.other.findByIdAndUpdate(req.params.id, send, { new: true })
+          await db.other.findByIdAndUpdate(req.params.id, send, { new: true })
           res.status(200)
-          res.send({ success: true, message: '儲存成功', result })
+          res.send({ success: true, message: '儲存成功', result: send })
         } catch (error) {
           if (error.name === 'ValidationError') {
             // 資料格式錯誤
