@@ -80,11 +80,6 @@ export default {
   methods: {
     navbar (page) {
       this.page = page
-      if (page === 'take-away') {
-        this.$store.commit('catch', true)
-      } else {
-        this.$store.commit('catch', false)
-      }
     },
     heartbeat () {
       if (this.$store.getters.check_user) {

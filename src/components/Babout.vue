@@ -56,7 +56,6 @@ export default {
           const btn = document.getElementById('btn')
           btn.disabled = true
           this.file = file
-          this.isUpload = true
           setTimeout(() => {
             load(Date.now())
             btn.disabled = false
@@ -106,7 +105,6 @@ export default {
                 allowOutsideClick: false,
                 confirmButtonText: '確定'
               }).then((result) => {
-                this.isUpload = false
                 btn.disabled = false
                 if (response.data.result.image !== undefined) {
                   this.$store.commit('aboutImg', response.data.result.image)

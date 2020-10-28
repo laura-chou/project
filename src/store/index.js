@@ -33,9 +33,8 @@ export default new Vuex.Store({
     orderTime: '',
     orderItems: [],
     isOrder: false,
-    // 接收訂單(開關、呼叫api)
-    open: false,
-    catch: false,
+    // 接收訂單(呼叫api)
+    getOrder: false,
     // 聯絡我們 (背景圖)
     contactBg: '',
     // footer
@@ -114,12 +113,9 @@ export default new Vuex.Store({
     takeaway_notes (state) {
       return state.takeawayNotes
     },
-    // 接收訂單(開關、呼叫api)
-    open (state) {
-      return state.open
-    },
-    catch (state) {
-      return state.catch
+    // 接收訂單 (呼叫api)
+    get_order (state) {
+      return state.getOrder
     },
     // 聯絡我們 (背景圖)
     contact_bg (state) {
@@ -216,12 +212,9 @@ export default new Vuex.Store({
     isOrder (state, data) {
       state.isOrder = data
     },
-    // 接收訂單(開關、呼叫api)
-    open (state, data) {
-      state.open = data
-    },
-    catch (state, data) {
-      state.catch = data
+    // 接收訂單 (呼叫api)
+    getOrder (state, data) {
+      state.getOrder = data
     },
     // 聯絡我們 (背景圖)
     contactBg (state, data) {

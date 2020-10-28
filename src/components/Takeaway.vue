@@ -29,25 +29,35 @@ export default {
     img () {
       const taimg = 'background-image:url("' + process.env.VUE_APP_APIURL + '/file/' + this.$store.getters.takeaway_img + '")'
       return taimg
-    },
-    getOpen () {
-      return this.$store.getters.open
     }
   },
   methods: {
     order () {
-      if (this.getOpen) {
-        this.$router.push('/order')
-      } else {
-        (async () => {
-          await this.$swal.fire({
-            icon: 'warning',
-            title: '店家尚未開放預定',
-            allowOutsideClick: false,
-            confirmButtonText: '確定'
-          })
-        })()
-      }
+      this.axios.get(process.env.VUE_APP_APIURL + '/open')
+        .then(response => {
+          if (response.data.open) {
+            this.$router.push('/order')
+          } else {
+            (async () => {
+              await this.$swal.fire({
+                icon: 'warning',
+                title: '店家尚未開放預定',
+                allowOutsideClick: false,
+                confirmButtonText: '確定'
+              })
+            })()
+          }
+        })
+        .catch(() => {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '發生錯誤',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        })
     }
   },
   mounted () {

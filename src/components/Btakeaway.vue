@@ -93,11 +93,8 @@ export default {
       const today = yyyy + '-' + MM + '-' + dd
       return today
     },
-    getOpen () {
-      return this.$store.getters.open
-    },
-    getCatch () {
-      return this.$store.getters.catch
+    getOrder () {
+      return this.$store.getters.get_order
     }
   },
   methods: {
@@ -241,39 +238,81 @@ export default {
       const onoffinner = document.getElementsByClassName('onoffswitch-inner')[0]
       const onoffswitch = document.getElementsByClassName('onoffswitch-switch')[0]
       if (onoffinner.style.marginLeft === '0px') {
-        this.$store.commit('open', false)
+        // 關
         onoffinner.style.marginLeft = '-100%'
         onoffswitch.style.right = '49px'
+        this.$store.commit('getOrder', false)
+        this.editOpen(false)
       } else {
-        this.$store.commit('open', true)
+        // 開
         onoffinner.style.marginLeft = '0'
         onoffswitch.style.right = '0px'
+        this.$store.commit('getOrder', true)
+        this.editOpen(true)
+        this.getApi()
+      }
+    },
+    editOpen (boolean) {
+      this.axios.patch(process.env.VUE_APP_APIURL + '/update_open', { isopen: boolean })
+        .then(response => {})
+        .catch(error => {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: error.response.data.message,
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        })
+    },
+    isOpen () {
+      const onoffinner = document.getElementsByClassName('onoffswitch-inner')[0]
+      const onoffswitch = document.getElementsByClassName('onoffswitch-switch')[0]
+      // 判斷是否取得訂單
+      this.axios.get(process.env.VUE_APP_APIURL + '/open')
+        .then(response => {
+          if (response.data.open) {
+            // 開
+            onoffinner.style.marginLeft = '0'
+            onoffswitch.style.right = '0px'
+            this.$store.commit('getOrder', true)
+            this.getApi()
+          } else {
+            // 關
+            onoffinner.style.marginLeft = '-100%'
+            onoffswitch.style.right = '49px'
+            this.$store.commit('getOrder', false)
+          }
+        })
+        .catch(() => {
+          (async () => {
+            await this.$swal.fire({
+              icon: 'error',
+              title: '發生錯誤',
+              allowOutsideClick: false,
+              confirmButtonText: '確定'
+            })
+          })()
+        })
+    },
+    getApi () {
+      if (this.getOrder) {
+        this.getTakeaway()
+        const run = setInterval(() => {
+          // 每 5 分鐘向後台取得訂單
+          if (this.getOrder) {
+            this.getTakeaway()
+          } else {
+            clearInterval(run)
+          }
+        }, 1000 * 60 * 5)
       }
     }
   },
   mounted () {
-    const onoffinner = document.getElementsByClassName('onoffswitch-inner')[0]
-    const onoffswitch = document.getElementsByClassName('onoffswitch-switch')[0]
-    // 判斷是否取得訂單
-    if (this.getCatch) {
-      this.getTakeaway()
-      const run = setInterval(() => {
-        // 每 5 分鐘向後台取得訂單
-        if (this.getCatch) {
-          this.getTakeaway()
-        } else {
-          clearInterval(run)
-        }
-      }, 1000 * 60 * 5)
-    }
-    // 開關
-    if (this.getOpen) {
-      onoffinner.style.marginLeft = '0'
-      onoffswitch.style.right = '0px'
-    } else {
-      onoffinner.style.marginLeft = '-100%'
-      onoffswitch.style.right = '49px'
-    }
+    this.isOpen()
+    this.getApi()
   }
 }
 </script>
