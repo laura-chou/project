@@ -169,6 +169,15 @@ const otherSchema = new Schema({
 }, {
   versionKey: false
 })
+// 是否接單
+const openSchema = new Schema({
+  isopen: {
+    type: Boolean
+  }
+}, {
+  versionKey: false
+})
+
 const users = mongoose.model(process.env.COLLECTION_USER, userSchema)
 const about = mongoose.model(process.env.COLLECTION_ABOUT, aboutSchema)
 const news = mongoose.model(process.env.COLLECTION_NEWS, newsSchema)
@@ -177,6 +186,7 @@ const location = mongoose.model(process.env.COLLECTION_LOCATION, locationSchema)
 const takeaway = mongoose.model(process.env.COLLECTION_TAKEAWAY, takeawaySchema)
 const contact = mongoose.model(process.env.COLLECTION_CONTACT, contactSchema)
 const other = mongoose.model(process.env.COLLECTION_OTHER, otherSchema)
+const open = mongoose.model(process.env.COLLECTION_OPEN, openSchema)
 const connection = mongoose.connection
 
 export default {
@@ -188,5 +198,6 @@ export default {
   takeaway,
   contact,
   other,
+  open,
   connection
 }

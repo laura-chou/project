@@ -37,6 +37,7 @@ app.use(cors({
   },
   credentials: true
 }))
+app.set('trust proxy', 1)
 app.use(session({
   secret: 'project',
   // 將 session 存入 mongodb
@@ -51,7 +52,9 @@ app.use(session({
     // 1000 毫秒 = 一秒鐘
     // 1000 毫秒 * 60 = 一分鐘
     // 1000 毫秒 * 60 * 30 = 三十分鐘
-    maxAge: 1000 * 60 * 30
+    maxAge: 1000 * 60 * 30,
+    sameSite: 'none',
+    secure: true
   },
   // 是否保存未修改的 session
   saveUninitialized: false,
@@ -62,7 +65,6 @@ app.use(session({
 
 let storage
 let imageName = ''
-let phoneLogin = false
 if (process.env.FTP === 'false') {
   // 開發環境將上傳檔案放本機
   storage = multer.diskStorage({
@@ -113,7 +115,7 @@ app.listen(process.env.PORT, () => {
 // 心跳
 app.get('/heartbeat', async (req, res) => {
   let islogin = false
-  if (req.session.user !== undefined || phoneLogin) {
+  if (req.session.user !== undefined) {
     islogin = true
   }
   res.status(200)
@@ -180,9 +182,6 @@ app.post('/login', async (req, res) => {
     )
     if (result.length > 0) {
       req.session.user = result[0].account
-      if (req.session.user !== undefined) {
-        phoneLogin = true
-      }
       res.status(200)
       res.send({ success: true, message: '' })
     } else {
@@ -208,11 +207,9 @@ app.delete('/logout', async (req, res) => {
   req.session.destroy(error => {
     if (error) {
       res.status(500)
-      phoneLogin = false
       res.send({ success: false, message: '伺服器錯誤' })
     } else {
       res.clearCookie()
-      phoneLogin = false
       res.status(200)
       res.send({ success: true, message: '' })
     }
@@ -929,6 +926,44 @@ app.patch('/update_other/:id', async (req, res) => {
         }
       }
     })
+  } catch (error) {
+    res.status(500)
+    res.send({ success: false, message: '發生錯誤' })
+  }
+})
+/* ---------------------------------------- 是否接單 --------------------------------------------- */
+// 讀取
+app.get('/open', async (req, res) => {
+  try {
+    db.open.find({}, function (err, open) {
+      if (!err && open.length > 0) {
+        res.status(200)
+        res.send({ success: true, message: '所有項目', open: open[0].isopen })
+      } else {
+        res.status(400)
+        res.send({ success: false, message: '資料庫沒有資料' })
+      }
+    })
+  } catch (error) {
+    // 找不到東西
+    res.status(404)
+    res.send({ success: false, message: '找不到' })
+  }
+})
+// 編輯 / 修改
+app.patch('/update_open', async (req, res) => {
+  if (!req.headers['content-type'].includes('application/json')) {
+    res.status(400)
+    res.send({ success: false, message: '格式不符' })
+    return
+  }
+  try {
+    const find = await db.open.findById('5f96fedba4b295642229f9b9')
+    if (req.body.isopen !== find.isopen) {
+      const result = await db.open.findByIdAndUpdate('5f96fedba4b295642229f9b9', req.body, { new: true })
+      res.status(200)
+      res.send({ success: true, message: '儲存成功', result })
+    }
   } catch (error) {
     res.status(500)
     res.send({ success: false, message: '發生錯誤' })
