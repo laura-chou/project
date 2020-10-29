@@ -565,7 +565,7 @@ app.delete('/delete_menu/:id', async (req, res) => {
       res.send({ success: true, message: '找不到資料' })
     } else {
       res.status(200)
-      res.send({ success: true, message: '刪除成功', result })
+      res.send({ success: true, message: '刪除成功' })
     }
   } catch (error) {
     if (error.name === 'CastError') {
@@ -960,9 +960,9 @@ app.patch('/update_open', async (req, res) => {
   try {
     const find = await db.open.findById('5f96fedba4b295642229f9b9')
     if (req.body.isopen !== find.isopen) {
-      const result = await db.open.findByIdAndUpdate('5f96fedba4b295642229f9b9', req.body, { new: true })
+      await db.open.findByIdAndUpdate('5f96fedba4b295642229f9b9', req.body, { new: true })
       res.status(200)
-      res.send({ success: true, message: '儲存成功', result })
+      res.send({ success: true, message: '儲存成功' })
     }
   } catch (error) {
     res.status(500)

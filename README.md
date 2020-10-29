@@ -1,9 +1,9 @@
-# 艸頭黃 後台 API
+# 艸頭黃 後端 API
 ## 關於我們 
 ### 資料欄位
 - `image` 圖片名稱
 - `introduction` 關於我們說明
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/about`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -22,20 +22,22 @@
   ```
 ### 修改
 - 請求方式為 **PATCH**
-- 路徑為 `/update_about`，以 param 判斷要修改的項目
-- 以 ID 修改圖片名稱、說明
-- 只接受 `multipart/form-data` 格式，`id` 是 about 的 ID，`data` 是要修改的資料
+- 路徑為 `/update_about`，以 id 判斷要修改的項目
+- 只接受 `multipart/form-data` 格式，`image` 是要上傳的圖片，`introduction` 是說明
 ```js
-  {
-    "id": "",
-    "data": ""
-  }
+    "image": "",
+    "introduction": ""
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
   ```js
   {
     "success": true,
     "message": "",
+    "result": {
+      "_id": "",
+      "image": "",
+      "introduction": ""
+    }
   }
   ```
 ---
@@ -62,7 +64,13 @@
   {
     "success": true,
     "message": "",
-    "id": ""
+    "result": {
+      "_id": "",
+      "date": "",
+      "title": "",
+      "content": "",
+      "url": ""
+    }
   }
   ```
 ### 刪除
@@ -77,13 +85,15 @@
   ```
 ### 修改
 - 請求方式為 **PATCH**
-- 路徑為 `/update_news`，以 param 判斷要修改的項目
-- 以 ID 修改日期、標題、內容、網址
-- 只接受 `application/json` 格式，`id` 是 news 的 ID，`data` 是要修改的資料
+- 路徑為 `/update_news`，以 id 判斷要修改的項目
+- 只接受 `application/json` 格式
+- `date` 是要修改的日期，`title` 是要修改的標題，`content` 是要修改的內容，`url` 是要修改的網址
 ```js
   {
-    "id": "",
-    "data": ""
+    "date": "",
+    "title": "",
+    "content": "",
+    "url": ""
   }
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -92,7 +102,7 @@
     "success": true,
     "message": "",
     "result": {
-        "id": "",
+        "_id": "",
         "data": "",
         "title": "",
         "content": "",
@@ -100,7 +110,7 @@
     }
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/menu`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -110,7 +120,7 @@
     "message": "",
     "news": [
       {
-        "id": "",
+        "_id": "",
         "data": "",
         "title": "",
         "content": "",
@@ -145,7 +155,7 @@
     "success": true,
     "message": "",
     "result": {
-        "id": ""
+        "_id": ""
         "name": "",
         "image": "",
         "notes": "",
@@ -165,14 +175,14 @@
   ```
 ### 修改
 - 請求方式為 **PATCH**
-- 路徑為 `/update_menu`，以 param 判斷要修改的項目
-- 以 ID 修改項目名稱、圖片名稱、附註、價格
-- 只接受 `multipart/form-data` 格式，`id` 是 menu 的 ID，`data` 是要修改的資料
+- 路徑為 `/update_menu`，以 ID 判斷要修改的項目
+- 只接受 `multipart/form-data` 格式
+- `name` 是要修改的項目名稱，`image` 是要修改的圖片名稱，`notes` 是要修改的附註，`price` 是要修改的價格
 ```js
-  {
-    "id": "",
-    "data": ""
-  }
+  "name": "",
+  "image": "",
+  "notes": "",
+  "price": 0
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
   ```js
@@ -180,7 +190,7 @@
     "success": true,
     "message": "",
     "result": {
-        "id": ""
+        "_id": ""
         "name": "",
         "image": "",
         "notes": "",
@@ -188,7 +198,7 @@
     }
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/menu`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -198,7 +208,7 @@
     "message": "",
     "menu": [
       {
-        "id": "",
+        "_id": "",
         "name": "",
         "image": "",
         "notes": "",
@@ -216,13 +226,15 @@
 - `metro` 捷運資訊
 ### 修改
 - 請求方式為 **PATCH**
-- 路徑為 `/update_location`，以 param 判斷要修改的項目
+- 路徑為 `/update_location`，以 ID 判斷要修改的項目
+- 只接受 `application/json` 格式
 - 以 ID 修改地址、公車資訊、捷運資訊
-- 只接受 `application/json` 格式，`id` 是 location 的 ID，`data` 是要修改的資料
+- `address` 是地址，`bus` 是公車資訊，`metro` 是捷運資訊
 ```js
   {
-    "id": "",
-    "data": ""
+    "address": "",
+    "bus": "",
+    "metro": ""
   }
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -231,27 +243,27 @@
     "success": true,
     "message": "",
     "result": {
-        "id": ""
-        "address": "",
-        "fb": "",
-        "ig": ""
+      "_id": "",
+      "address": "",
+      "bus": "",
+      "metro": ""
     }
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/location`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
-    "menu": [
+    "location": [
       {
-        "id": "",
+        "_id": "",
         "address": "",
-        "fb": "",
-        "ig": ""
+        "bus": "",
+        "metro": ""
       }
     ]
   }
@@ -307,7 +319,7 @@
     "message": "",
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/takeaway`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -333,6 +345,37 @@
         "total": 0
       }
     ]
+  }
+  ```
+---
+## 是否接單開關 
+### 資料欄位
+- `isopen` 是否接單
+### 修改
+- 請求方式為 **PATCH**
+- 路徑為 `/update_open`
+- 只接受 `application/json` 格式
+```js
+  {
+    "isopen": boolean
+  }
+  ```
+- 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
+  ```js
+  {
+    "success": true,
+    "message": ""
+  }
+  ```
+### 查詢
+- 請求方式為 **GET**
+- 路徑為 `/open`
+- 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
+  ```js
+  {
+    "success": true,
+    "message": "",
+    "open": boolean
   }
   ```
 ---
@@ -371,17 +414,17 @@
     "message": "",
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/contact`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
     "takeaway": [
         {
-            "id": ""
+            "_id": ""
             "name": "",
             "email": "",
             "message": "",
@@ -406,53 +449,69 @@
 - `ig` instagram 網址
 ### 修改
 - 請求方式為 **PATCH**
-- 路徑為 `/update_other`，以 param 判斷要修改的項目
-- 以 ID 修改資料
-- 只接受 `multipart/form-data` 格式，`id` 是 other 的 ID，`data` 是要修改的資料
-```js
-  {
-    "id": "",
-    "data": ""
-  }
+- 路徑為 `/update_other`，以 ID 判斷要修改的項目
+- 只接受 `multipart/form-data` 格式
+- 如果 `page` 是 `carousel`
+- `page` 是輪播圖，`image` 是要修改的圖片，`filename` 是現在使用的圖片名稱
+  ```js
+  "page": "carousel",
+  "image": ["", "", ""],
+  "filename": ["", "", ""]
   ```
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-- 如果 `page` 是 `carousel`
   ```js
   {
     "success": true,
     "message": "",
     "result": {
-        "carousel": ["","",""],
+      "carousel": ["","",""]
     }
   }
   ```
 - 如果 `page` 是 `background`
-```js
+- `page` 是背景圖，`image` 是要修改的圖片，`filename` 是現在使用的圖片名稱
+  ```js
+  "page": "background",
+  "image": ["", "", ""],
+  "filename": ["", "", ""]
+  ```
+- 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
+  ```js
   {
     "success": true,
     "message": "",
     "result": {
-        "menubg_img": "",
-        "take_away_img": "",
-        "contactbg_img": "",
+      "menubg_img": "",
+      "take_away_img": "",
+      "contactbg_img": ""
     }
   }
   ```
 - 如果 `page` 是 `message`
-```js
+- `page` 是文字訊息，`take_away_notes` 是要修改的注意事項(將三項注意事項串成字串，中間用`===`隔開，例如：事項1===事項2===事項3)，`open_time` 是要修改的營業時間，`phone`是要修改的連絡電話，`fb`是要修改的facebook網址，`ig`是要修改的instagram網址
+  ```js
+  "page": "message",
+  "take_away_notes": "",
+  "open_time": "",
+  "phone": "",
+  "fb": "",
+  "ig": "",
+  ```
+- 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
+  ```js
   {
     "success": true,
     "message": "",
     "result": {
-        "take_away_notes": ["","",""],
-        "open_time": "",
-        "phone": "",
-        "fb": "",
-        "ig": ""
+      "take_away_notes": ["", "", ""],
+      "open_time": "",
+      "phone": "",
+      "fb": "",
+      "ig": "",
     }
   }
   ```
-### 查詢欄位
+### 查詢
 - 請求方式為 **GET**
 - 路徑為 `/other`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
@@ -462,9 +521,9 @@
     "message": "",
     "other": [
       {
-        "id": "",
-        "menubg_img": "",
+        "_id": "",
         "carousel": ["","",""],
+        "menubg_img": "",
         "take_away_img": "",
         "contactbg_img": "",
         "take_away_notes": ["","",""],
@@ -502,9 +561,9 @@
 - 請求方式為 **DELETE**
 - 路徑為 `/logout`
 - 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
-    ```js
-        {
-        "success": true,
-        "message": ""
-        }
-    ```
+  ```js
+  {
+  "success": true,
+  "message": ""
+  }
+  ```
