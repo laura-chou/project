@@ -7,13 +7,13 @@
 - 請求方式為 **GET**
 - 路徑為 `/about`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
     "about": [
       {
-        "id": "",
+        "_id": "",
         "image": "",
         "introduction": ""
       }
@@ -24,7 +24,7 @@
 - 請求方式為 **PATCH**
 - 路徑為 `/update_about`，以 id 判斷要修改的項目
 - 只接受 `multipart/form-data` 格式，`image` 是要上傳的圖片，`introduction` 是說明
-```js
+  ```js
     "image": "",
     "introduction": ""
   ```
@@ -59,7 +59,7 @@
     "url": ""
   }
   ```
-  - 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
+- 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
   ```js
   {
     "success": true,
@@ -88,7 +88,7 @@
 - 路徑為 `/update_news`，以 id 判斷要修改的項目
 - 只接受 `application/json` 格式
 - `date` 是要修改的日期，`title` 是要修改的標題，`content` 是要修改的內容，`url` 是要修改的網址
-```js
+  ```js
   {
     "date": "",
     "title": "",
@@ -114,7 +114,7 @@
 - 請求方式為 **GET**
 - 路徑為 `/menu`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
@@ -178,7 +178,7 @@
 - 路徑為 `/update_menu`，以 ID 判斷要修改的項目
 - 只接受 `multipart/form-data` 格式
 - `name` 是要修改的項目名稱，`image` 是要修改的圖片名稱，`notes` 是要修改的附註，`price` 是要修改的價格
-```js
+  ```js
   "name": "",
   "image": "",
   "notes": "",
@@ -202,7 +202,7 @@
 - 請求方式為 **GET**
 - 路徑為 `/menu`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
@@ -230,7 +230,7 @@
 - 只接受 `application/json` 格式
 - 以 ID 修改地址、公車資訊、捷運資訊
 - `address` 是地址，`bus` 是公車資訊，`metro` 是捷運資訊
-```js
+  ```js
   {
     "address": "",
     "bus": "",
@@ -397,7 +397,7 @@
     "date": ""
   }
   ```
-  - 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
+- 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
   ```js
   {
     "success": true,
@@ -515,7 +515,7 @@
 - 請求方式為 **GET**
 - 路徑為 `/other`
 - 回傳相應狀態碼、是否成功、失敗訊息，資料格式為 JSON
-```js
+  ```js
   {
     "success": true,
     "message": "",
@@ -550,7 +550,7 @@
     "password": "",
   }
   ```
-  - 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
+- 回傳相應狀態碼、是否成功、失敗訊息及 ID，資料格式為 JSON
   ```js
   {
     "success": true,
